@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { CssBaseline } from '@mui/material'
 
-
 function MyApp({ Component, pageProps }) {
 
   const getLayout = Component.getLayout ?? ((page) => page)

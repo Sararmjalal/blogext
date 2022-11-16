@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    SERVER: 'localhost:4000',
+    SERVER: 'http://localhost:4000',
     SITE_TITLE: 'Blogext'
   },
 }
