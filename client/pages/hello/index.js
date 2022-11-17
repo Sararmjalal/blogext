@@ -1,4 +1,7 @@
 import { postJSON } from '../../apis/clients'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectUser, setCurrent, removeCurrent } from '../../store/slice'
+import { useEffect, useState } from 'react'
 
 function Page() {
 
@@ -11,9 +14,24 @@ function Page() {
     
     if (data.msg) return alert("bemir")
     alert("afarin")
-}
+  }
+
+  const [mystate, setmystate] = useState(0)
   
-  return <button onClick={() => signUp("salamy", "salamy")}>it will run the sign up with your daTa</button>
+  const thisUser = useSelector(state => state.userReducer.current)
+  
+  const dispatch = useDispatch()
+  
+  const myFunction = (data) => {
+    dispatch(setCurrent(data))
+    setmystate(mystate + 1)
+  }
+  
+  useEffect(() => {
+    console.log("current changed!", thisUser)
+  }, [mystate])
+  
+  return <button onClick={() => myFunction("sara")}>it will run the sign up with your daTa</button>
 }
 
 export default Page
