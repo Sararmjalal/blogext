@@ -10,7 +10,7 @@ export const userSlice = createSlice({
     setCurrent: (state, action) => {
       state.current = action.payload
     },
-    removeCurrent: state => {
+    removeCurrent: (state) => {
       (new Cookies).remove('ut', { path: "/" })
       state.current = null
     }
