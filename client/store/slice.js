@@ -4,11 +4,12 @@ import Cookies from 'universal-cookie'
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    current: 'hellow'
+    current: null
   },
   reducers: {
     setCurrent: (state, action) => {
       state.current = action.payload
+      console.log('reducer called')
     },
     removeCurrent: (state) => {
       (new Cookies).remove('ut', { path: "/" })

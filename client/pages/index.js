@@ -2,7 +2,19 @@ import Head from 'next/head'
 import Button from '@mui/material/Button'
 import { useTitle } from '../lib'
 
-export default function Home() {
+export async function getStaticProps() {
+    const writers = await getTopWriters()
+    const blogs = await getTopBlogs()
+    return {
+      props: {
+        writers,
+        blogs
+      },
+      revalidate: 84600 //roozanas
+  }
+}
+
+export default function Home({writers, blogs}) {
   return (
     <div>
       <Head>
