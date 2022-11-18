@@ -1,8 +1,11 @@
 import { toast } from "react-toastify"
-import useSWR from "swr"
 import { useToken } from "../lib"
 
-export const fetcher = async (...args) => await (await fetch(...args)).json()
+export const fetcher = async (url, headers = {'Content-Type': 'application/json'}) => {
+  const res = await (await fetch(url, {headers})).json()
+  if (res.msg) throw new Error(res.msg)
+  return res
+}
     
 export const postJSON = async (url, body, requireAuth = true) => {
     const res = await fetch(url, {
@@ -22,11 +25,12 @@ export const postJSON = async (url, body, requireAuth = true) => {
 }
 
 export const postMe = async () => {
-  if (!useToken) return toast.error('Something went wrong. Please try again!')
+  console.log(useToken)
+  if (useToken.includes('undefiend')) return toast.error('Something went wrong. Please try again!')
   try {
-    return await (await postJSON(`${process.env.SERVER}/user/me`, {})).json()
+    return await postJSON(`${process.env.SERVER}/user/me`, {})
   } catch (error) {
-    console.log("me error", error)
+    toast.error("Server is closed or you're not one of us lool")
   }
 }
 

@@ -10,11 +10,11 @@ const SignIn = () => {
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const signup = async ({ username, name }) => {
-    const body = {
-      username: username.value,
-      name: name.value
-    }
+  const signup = async (body) => {
+    // const body = {
+    //   username: username.value,
+    //   name: name.value
+    // }
 
     try {
       const res = await postJSON(`${process.env.SERVER}/user/signup`, body, false)
@@ -30,12 +30,12 @@ const SignIn = () => {
     }
   }
 
-  const login = async ({ username, password }) => {
+  const login = async (body) => {
     
-    const body = {
-      username: username.value,
-      password: password.value
-    }
+    // const body = {
+    //   username: username.value,
+    //   password: '1111'
+    // }
 
     try {
       const res = await postJSON(`${process.env.SERVER}/user/login`, body, false)
@@ -43,7 +43,7 @@ const SignIn = () => {
         return toast.error('Not of on us lool')
       if (res.msg === 'password doesnt match')
         return toast.error("Wrong password")
-
+      setToken(res.token)
       const user = await postMe()
       dispatch(setCurrent(user))
       router.push('/dashboard')
@@ -54,7 +54,7 @@ const SignIn = () => {
     }
   }
 
-  return <Button onClick={signup}>Click me</Button>
+  return <Button onClick={login}>Click me</Button>
 }
 
 export default SignIn

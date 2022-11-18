@@ -6,19 +6,24 @@ import { Button } from "@mui/material"
 import { toast } from "react-toastify"
 
 const EditBlog = () => {
+
   const router = useRouter()
-  const { data } = useSWR(`${process.env.SERVER}/blog/single-blog/${router.query._id}`, fetcher)
+
+  const { data, error } = useSWR(`${process.env.SERVER}/blog/single-blog/${router?.query?._id}`, fetcher)
+
   const [thisBlog, setThisBlog] = useState(null)
 
-  console.log(thisBlog)
-
   useEffect(() => {
-    if (data) setThisBlog({
+    if (data && !error) setThisBlog({
       title: data.title,
       content: data.content,
       imgurl: data.imgurl
     })
   }, [data])
+
+  useEffect(() => {
+    if (error) return router.push('/404')
+  }, [error])
 
   const edit = async () => {
     try {
@@ -37,7 +42,7 @@ const EditBlog = () => {
     }
   }
 
-  if (!data || data.msg) return <h1>Loading...</h1>
+  if (!data) return <h1>Loading...</h1>
   return (
     <div>
       <h1>{thisBlog.title}</h1>
