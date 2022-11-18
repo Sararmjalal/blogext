@@ -1,15 +1,11 @@
+import { toast } from "react-toastify"
 import useSWR from "swr"
 import { useToken } from "../lib"
-import { useDispatch } from "react-redux"
-import { setCurrent } from '../store/slice'
 
-export const getMyBlogs = () => useSWR (
-    [`${process.env.SERVER}/blog/my-blogs`, useToken],
-    async (...args) => await (await fetch(...args)).json()
-  )
-
+export const fetcher = async (...args) => await (await fetch(...args)).json()
+    
 export const postJSON = async (url, body, requireAuth = true) => {
-  return await fetch(url, {
+    const res = await fetch(url, {
     method: "POST",
     headers: requireAuth ?
       {
@@ -21,11 +17,12 @@ export const postJSON = async (url, body, requireAuth = true) => {
         'Content-Type': 'application/json',
       },
     body: JSON.stringify(body)
-  })
+    })
+  return await res.json()
 }
 
 export const postMe = async () => {
-  if (!useToken) return alert("nmitooni fetch bezani lool")
+  if (!useToken) return toast.error('Something went wrong. Please try again!')
   try {
     return await (await postJSON(`${process.env.SERVER}/user/me`, {})).json()
   } catch (error) {

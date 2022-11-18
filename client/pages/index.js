@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Button from '@mui/material/Button'
 import { useTitle } from '../lib'
+import {getTopWriters, getTopBlogs} from '../apis/statics'
 
 export async function getStaticProps() {
     const writers = await getTopWriters()

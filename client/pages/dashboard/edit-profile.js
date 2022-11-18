@@ -1,5 +1,5 @@
 const EditProfile = () => {
-  return <h1>Edit Profile yeay!</h1>
+  return <div>jdfskfjds</div>
 }
 
 export default EditProfile
