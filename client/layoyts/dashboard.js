@@ -1,14 +1,22 @@
-import StateProvider from "./stateProvider"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
+import TopBar from "../components/main/TopBar"
 
-const DashboardLayout = ({ children }) => {
+
+const DashboardLayout = ({ children, thisUser }) => {
   
+  const router = useRouter()
 
+  useEffect(() => {
+    // if(!thisUser) router.push('/sign-in')
+    console.log(thisUser)
+  }, [thisUser])
 
   return (
-    <StateProvider>
-      <div style={{height: "20px", background: "red"}}></div>
+    <section>
+      <TopBar />
       <main>{children}</main>
-    </StateProvider>
+    </section>
   )
 }
 

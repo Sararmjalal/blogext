@@ -1,20 +1,20 @@
 import { postJSON, postMe } from "../apis/clients"
 import { useRouter } from "next/router"
-import { setToken, useToken} from "../lib"
+import { setToken } from "../lib"
 import { Button } from "@mui/material"
-import { useDispatch } from "react-redux"
-import { setCurrent } from "../store/slice"
+import { useDispatch, useSelector } from "react-redux"
+import { setCurrentUser, selectUser } from "../store/slice"
 import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
-import Cookies from "universal-cookie"
 
 const SignIn = () => {
   const router = useRouter()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
-  const cookies = new Cookies()
+  const thisUser = useSelector(selectUser)
+
   useEffect(() => {
-    useToken() ? router.push('/dashboard') : setLoading(false)
+    thisUser ? router.push('/dashboard') : setLoading(false)
   }, [])
 
   const signup = async (body) => {
@@ -23,7 +23,7 @@ const SignIn = () => {
       if (res.msg) return toast.warn('Already one of us lool')
       setToken(res.token)
       const user = await postMe()
-      dispatch(setCurrent(user))
+      dispatch(setCurrentUser(user))
       router.push('/dashboard')
       toast.success("You've logged in successfully!")
     }
@@ -45,22 +45,21 @@ const SignIn = () => {
         return toast.error('Not of on us lool')
       if (res.msg === 'password doesnt match')
         return toast.error("Wrong password")
-      console.log(res.token, 'token in login')
       setToken(res.token)
       const user = await postMe()
       if(!user) return
-      dispatch(setCurrent(user))
+      dispatch(setCurrentUser(user))
       router.push('/dashboard')
       toast.success("You've logged in successfully!")
     }
     catch (error) {
       toast.error('Server is closed lool')
-      console.log(error)
     }
   }
 
-  if(loading) return <h1>Loading...</h1>
-  return <Button onClick={login}>Click me</Button>
+  return (
+      <Button onClick={login}>Click me</Button>
+  )
 }
 
 export default SignIn

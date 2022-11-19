@@ -4,6 +4,7 @@ import { store } from '../store/store'
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import StateProvider from '../layoyts/provider'
 
 function MyApp({ Component, pageProps }) {
 
@@ -11,24 +12,26 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <CssBaseline>
-        <Head>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-        </Head>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-          />
-          {getLayout(<Component {...pageProps} />)}
-      </CssBaseline>
+      <StateProvider>
+        <CssBaseline>
+          <Head>
+            <meta name="viewport" content="initial-scale=1, width=device-width" />
+          </Head>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
+            {getLayout(<Component {...pageProps} />)}
+          </CssBaseline>
+        </StateProvider>
     </Provider>
   )
   

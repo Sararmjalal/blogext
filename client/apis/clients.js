@@ -14,8 +14,6 @@ export const postJSON = async (url, body, requireAuth = true) => {
   };
   if (requireAuth) headers.auth = useToken()
 
-  console.log(headers, 'headers')
-
   const res = await fetch(url, {
     method: "POST",
     headers: headers,

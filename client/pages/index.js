@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Button from '@mui/material/Button'
 import { useTitle } from '../lib'
-import {getTopWriters, getTopBlogs} from '../apis/statics'
+import { getTopWriters, getTopBlogs } from '../apis/statics'
+import Header from '../components/Main/Header'
 
 export async function getStaticProps() {
     const writers = await getTopWriters()
@@ -18,6 +19,7 @@ export async function getStaticProps() {
 export default function Home({writers, blogs}) {
   return (
     <div>
+      <Header />
       <Head>
         <title>{useTitle('Home')}</title>
         <meta name="description" content="Simple Blog App with Next.js" />

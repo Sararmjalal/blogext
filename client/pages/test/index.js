@@ -1,5 +1,6 @@
 import { postJSON } from '../../apis/clients'
 import { getTopWriters } from '../../apis/statics'
+import CommentRate from '../../components/blog/CommentRate'
 
 export async function getStaticProps() {
   const data = await getTopWriters()
@@ -14,7 +15,6 @@ function Page({writers}) {
 
   console.log(writers)
   
-
   const signUp = async (username, name) => {
     const data = await(await postJSON(
     'http://localhost:4000/user/signup',
@@ -26,7 +26,7 @@ function Page({writers}) {
     alert("afarin")
   }
   
-  return <button onClick={() => myFunction("sara")}>it will run the sign up with your daTa</button>
+  return <CommentRate />
 }
 
 export default Page

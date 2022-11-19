@@ -1,22 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 import Cookies from 'universal-cookie'
 
-export const userSlice = createSlice({
+export const reduxSlice = createSlice({
   name: 'user',
   initialState: {
     current: null
   },
   reducers: {
-    setCurrent: (state, action) => {
+    setCurrentUser: (state, action) => {
       state.current = action.payload
     },
-    removeCurrent: (state) => {
+    removeCurrentUser: (state) => {
       (new Cookies()).remove('token', { path: "/" })
       state.current = null
     }
   },
 })
 
-export const { setCurrent, removeCurrent } = userSlice.actions
-export const selectUser = state => state.userReducer.current
-export default userSlice.reducer
+export const { setCurrentUser, removeCurrentUser } = reduxSlice.actions
+export const selectUser = state => state.reduxReducer.current
+export default reduxSlice.reducer

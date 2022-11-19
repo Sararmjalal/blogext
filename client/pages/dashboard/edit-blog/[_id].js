@@ -4,6 +4,7 @@ import useSWR from "swr"
 import { useEffect, useState } from "react"
 import { Button } from "@mui/material"
 import { toast } from "react-toastify"
+import { setLayout } from "../../../lib"
 import DashboardLayout from "../../../layoyts/dashboard"
 
 const EditBlog = () => {
@@ -56,4 +57,4 @@ const EditBlog = () => {
 
 export default EditBlog
 
-setLayout(Dashboard, DashboardLayout)
+setLayout(EditBlog, DashboardLayout)

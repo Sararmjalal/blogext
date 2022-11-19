@@ -11,6 +11,7 @@ export async function getStaticProps() {
 }
 
 const Blogs = ({blogs}) => {
+  console.log(blogs)
   return <h1>Blogs yeay!</h1>
 }
 
