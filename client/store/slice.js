@@ -9,10 +9,9 @@ export const userSlice = createSlice({
   reducers: {
     setCurrent: (state, action) => {
       state.current = action.payload
-      console.log('reducer called')
     },
     removeCurrent: (state) => {
-      (new Cookies).remove('ut', { path: "/" })
+      (new Cookies()).remove('token', { path: "/" })
       state.current = null
     }
   },

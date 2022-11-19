@@ -12,7 +12,9 @@ export const postJSON = async (url, body, requireAuth = true) => {
   const headers = {
     'Content-Type': 'application/json',
   };
-  if (requireAuth) headers.auth = useToken
+  if (requireAuth) headers.auth = useToken()
+
+  console.log(headers, 'headers')
 
   const res = await fetch(url, {
     method: "POST",
@@ -24,9 +26,9 @@ export const postJSON = async (url, body, requireAuth = true) => {
 }
 
 export const postMe = async () => {
-  if (useToken.includes('undefiend')) return toast.error('Something went wrong. Please try again!')
+  if (!useToken()) return toast.error('Something went wrong. Please try again!')
   try {
-    return await postJSON(`${process.env.SERVER}/user/me`, {})
+    return await postJSON(`${process.env.SERVER}/user/me`, {}, true)
   } catch (error) {
     toast.error("Server is closed or you're not one of us lool")
   }
@@ -35,7 +37,7 @@ export const postMe = async () => {
 export const postFormData = async (url, formData) => await (await fetch(url, {
   method: "POST",
   headers: {
-    'auth' : useToken
+    'auth' : useToken()
   },
   body: formData
 })).json()

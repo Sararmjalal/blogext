@@ -1,21 +1,20 @@
-import { selectUser } from "../../store/slice"
-import { useSelector } from "react-redux"
+import { setLayout } from "../../lib"
+import DashboardLayout from "../../layoyts/dashboard"
+import { Button } from "@mui/material"
+import { removeCurrent } from "../../store/slice"
+import { useDispatch } from "react-redux"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
-
 const Dashboard = () => {
-  const thisUser = useSelector(selectUser)
+  const dispatch = useDispatch()
   const router = useRouter()
-  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    thisUser ? setLoading(false) : router.push('sign-in')
-  }, [])
-
-  console.log(thisUser)
-  
-  if(loading) return <h1>loading...</h1>
-  return <h1>Dashboard yeay!</h1>
+  const logout = () => {
+    dispatch(removeCurrent())
+    router.push('/')
+  }
+  return <Button onClick={logout}>Logout</Button>
 }
 
 export default Dashboard
+
+setLayout(Dashboard, DashboardLayout)

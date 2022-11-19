@@ -1,7 +1,8 @@
 import { useRouter } from "next/router"
 import useSWR from "swr"
 import { fetcher } from "../../apis/clients"
-import { useToken } from "../../lib"
+import { useToken() } from "../../lib"
+import DashboardLayout from "../../layoyts/dashboard"
 
 const MyBlogs = () => {
 
@@ -12,7 +13,7 @@ const MyBlogs = () => {
       `${process.env.SERVER}/blog/my-blogs`,
       {
         'Content-Type': 'application/json',
-        'auth': useToken
+        'auth': useToken()
       }
     ]
     , fetcher)
@@ -24,3 +25,5 @@ const MyBlogs = () => {
 }
 
 export default MyBlogs
+
+setLayout(Dashboard, DashboardLayout)
