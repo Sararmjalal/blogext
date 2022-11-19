@@ -7,8 +7,15 @@ const MyBlogs = () => {
 
   const router = useRouter()
 
-  const { data, error } = useSWR([`${process.env.SERVER}/blog/my-blogs`,
-  {'Content-Type': 'application/json', 'auth': useToken}], fetcher)
+  const { data, error } = useSWR(
+    [
+      `${process.env.SERVER}/blog/my-blogs`,
+      {
+        'Content-Type': 'application/json',
+        'auth': useToken
+      }
+    ]
+    , fetcher)
 
   if (error) console.log(error)
   if (!data) return <h1>Loading...</h1>

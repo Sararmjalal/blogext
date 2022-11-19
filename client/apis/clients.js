@@ -8,24 +8,22 @@ export const fetcher = async (url, headers = {'Content-Type': 'application/json'
 }
     
 export const postJSON = async (url, body, requireAuth = true) => {
-    const res = await fetch(url, {
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  if (requireAuth) headers.auth = useToken
+
+  const res = await fetch(url, {
     method: "POST",
-    headers: requireAuth ?
-      {
-      'Content-Type': 'application/json',
-      'auth': useToken
-      }
-      :
-      {
-        'Content-Type': 'application/json',
-      },
+    headers: headers,
     body: JSON.stringify(body)
-    })
+  });
+
   return await res.json()
 }
 
 export const postMe = async () => {
-  console.log(useToken)
   if (useToken.includes('undefiend')) return toast.error('Something went wrong. Please try again!')
   try {
     return await postJSON(`${process.env.SERVER}/user/me`, {})
@@ -34,10 +32,10 @@ export const postMe = async () => {
   }
 }
 
-export const postFormData = async (url, formData) => await fetch(url, {
-    method: "POST",
-    headers: {
-      'auth' : useToken
-    },
-    body: formData
-})
+export const postFormData = async (url, formData) => await (await fetch(url, {
+  method: "POST",
+  headers: {
+    'auth' : useToken
+  },
+  body: formData
+})).json()

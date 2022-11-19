@@ -32,13 +32,13 @@ const SignIn = () => {
 
   const login = async (body) => {
     
-    // const body = {
-    //   username: username.value,
-    //   password: '1111'
-    // }
+    const body2 = {
+      username: 'sara',
+      password: '1111'
+    }
 
     try {
-      const res = await postJSON(`${process.env.SERVER}/user/login`, body, false)
+      const res = await postJSON(`${process.env.SERVER}/user/login`, body2, false)
       if (res.msg === 'bad request: no such user exists')
         return toast.error('Not of on us lool')
       if (res.msg === 'password doesnt match')

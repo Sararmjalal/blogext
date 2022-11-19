@@ -9,22 +9,22 @@ const AddBlog = () => {
     title: '',
     content: '',
     imgurl: ''
-  })
-  const router = useRouter()
+  });
+  const router = useRouter();
 
   const create = async () => {
     try {
-        const res = await postJSON(`${process.env.SERVER}/blog/write`, blog)
-        if(res.msg === 'bad request: bad inputs') return toast.error('Pay attention please!')
-        toast.success('You added a blog lool')
-        router.push('/dashboard/blogs')
+      const res = await postJSON(`${process.env.SERVER}/blog/write`, blog)
+      if (res.msg === 'bad request: bad inputs') return toast.error('Pay attention please!')
+      toast.success('You added a blog lool')
+      router.push('/dashboard/blogs')
     }
     catch (error) {
-        toast.error('Server is closed lool')
+      toast.error('Server is closed lool')
     }
-  }
+  };
 
-  return <Button onClick={create}>Add Blog</Button>
+  return <Button onClick={create}>Add Blog</Button>;
 }
 
 export default AddBlog
