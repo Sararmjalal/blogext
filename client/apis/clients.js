@@ -19,8 +19,6 @@ export const postJSON = async (url, body, requireAuth = true) => {
   };
   if (requireAuth) headers.auth = useToken()
 
-  console.log('BODY IN POST JSON', body)
-
   const res = await fetch(url, {
     method: "POST",
     headers: headers,
@@ -32,7 +30,7 @@ export const postJSON = async (url, body, requireAuth = true) => {
 
 export const postMe = async () => {
   if (!useToken()) return toast.error('Something went wrong. Please try again!')
-  return await postJSON(`${process.env.SERVER}/user/me`, {}, true)
+  return await postJSON(`${process.env.SERVER}/user/me`, {})
 }
 
 export const postFormData = async (url, formData) => await (await fetch(url, {
