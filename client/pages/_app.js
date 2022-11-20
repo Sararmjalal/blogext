@@ -4,7 +4,7 @@ import { store } from '../store/store'
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import StateProvider from '../layoyts/provider'
+import StateProvider from '../layouts/provider'
 
 function MyApp({ Component, pageProps }) {
   return (

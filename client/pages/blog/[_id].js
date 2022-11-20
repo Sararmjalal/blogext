@@ -1,4 +1,6 @@
 import { getAllBlogs, getSingleBlog } from "../../apis/statics"
+import { useTitle } from "../../lib"
+import Head from "next/head"
 
 export async function getStaticPaths() {
   const blogs = await getAllBlogs()
@@ -21,7 +23,18 @@ export async function getStaticProps(ctx) {
 }
 
 const Blog = ({ blog }) => {
-console.log(blog)
+  console.log(blog)
+  return (
+    <section>
+    <Head>
+      <title>{useTitle(blog.title)}</title>
+      <meta name="description" content="Single blog page" />
+    </Head>
+      <div>
+        <h1>Blog Yeay!</h1>
+      </div>
+  </section>
+  )
 }
 
 export default Blog

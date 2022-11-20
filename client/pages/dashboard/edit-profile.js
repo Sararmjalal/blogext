@@ -3,14 +3,16 @@ import { useSelector } from "react-redux"
 import { selectUser } from "../../store/slice"
 import { postFormData, postJSON } from "../../apis/clients"
 import { toast } from "react-toastify"
+import { useTitle } from "../../lib"
+import Head from "next/head"
 
 const EditProfile = () => {
   const thisUser = useSelector(selectUser)
-  const [data, setData] = useState(null)
+  const [user, setUser] = useState(null)
   const [file, setFile] = useState(null)
 
   useEffect(() => {
-    setData({
+    setUser({
       name: thisUser.name,
       bio: thisUser.bio,
       avatar: thisUser.avatar
@@ -21,7 +23,7 @@ const EditProfile = () => {
     if (file) {
       const fileReader = new FileReader()
       fileReader.onload = function (e) {
-        setData({...data, avatar:e.target.result})
+        setUser({...user, avatar:e.target.result})
       }
       fileReader.readAsDataURL(file)
     }
@@ -49,8 +51,17 @@ const EditProfile = () => {
     }
   }
 
-  if(!data) return <h1>Loading...</h1>
-  return <div> hehe !! </div>
+  if(!user) return <h1>Loading...</h1>
+  return (
+    <section>
+    <Head>
+      <title>{useTitle('My Profile')}</title>
+    </Head>
+      <div>
+        <h1>Edit Profile Yeay!</h1>
+      </div>
+  </section>
+  )
 }
 
 export default EditProfile

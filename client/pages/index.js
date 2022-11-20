@@ -19,7 +19,6 @@ export async function getStaticProps() {
 export default function Home({writers, blogs}) {
   return (
     <div>
-      <Header />
       <Head>
         <title>{useTitle('Home')}</title>
         <meta name="description" content="Simple Blog App with Next.js" />

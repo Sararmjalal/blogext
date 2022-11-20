@@ -3,6 +3,8 @@ import { Button } from "@mui/material"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import { useTitle } from "../../lib"
+import Head from "next/head"
 
 const AddBlog = () => {
   const [blog, setBlog] = useState({
@@ -24,7 +26,16 @@ const AddBlog = () => {
     }
   };
 
-  return <Button onClick={create}>Add Blog</Button>;
+  return (
+    <section>
+    <Head>
+     <title>{useTitle('Add Blog')}</title>
+    </Head>
+    <div>
+      <Button onClick={create}>Add blog</Button>
+    </div>
+  </section>
+  )
 }
 
 export default AddBlog

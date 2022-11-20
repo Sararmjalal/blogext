@@ -4,6 +4,8 @@ import useSWR from "swr"
 import { useEffect, useState } from "react"
 import { Button } from "@mui/material"
 import { toast } from "react-toastify"
+import { useTitle } from "../../../lib"
+import Head from "next/head"
 
 const EditBlog = () => {
 
@@ -44,12 +46,17 @@ const EditBlog = () => {
 
   if (!thisBlog) return <h1>Loading...</h1>
   return (
-    <div>
-      <h1>{thisBlog.title}</h1>
-      <h2>{thisBlog.content}</h2>
-      <h3>{thisBlog.imgurl}</h3>
-      <Button onClick={edit}>Edit blog</Button>
-    </div>
+    <section>
+      <Head>
+       <title>{useTitle('Edit Blog')}</title>
+      </Head>
+      <div>
+        <h1>{thisBlog.title}</h1>
+        <h2>{thisBlog.content}</h2>
+        <h3>{thisBlog.imgurl}</h3>
+        <Button onClick={edit}>Edit blog</Button>
+      </div>
+    </section>
   )
 }
 

@@ -1,11 +1,12 @@
 import { postJSON, postMe } from "../apis/clients"
 import { useRouter } from "next/router"
-import { setToken } from "../lib"
+import { setToken, useTitle } from "../lib"
 import { Button } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import { setCurrentUser, selectUser } from "../store/slice"
 import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
+import Head from "next/head"
 
 const SignIn = () => {
   const router = useRouter()
@@ -58,8 +59,17 @@ const SignIn = () => {
   }
 
   return (
-      <Button onClick={login}>Click me</Button>
-  )
+    <section>
+      <Head>
+        <title>{useTitle('Create an Account')}</title>
+        <meta name="description" content="Login/Register page" />
+      </Head>
+        <div>
+          <h1>Login Sign up yeay!</h1>
+          <Button onClick={login}>Click me</Button>
+        </div>
+    </section>
+    )
 }
 
 export default SignIn
