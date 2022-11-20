@@ -1,8 +1,7 @@
 import { useRouter } from "next/router"
 import useSWR from "swr"
 import { fetcher } from "../../apis/clients"
-import { useToken, setLayout } from "../../lib"
-import DashboardLayout from "../../layoyts/dashboard"
+import { useToken } from "../../lib"
 import { useDispatch } from "react-redux"
 import { setCurrentBlog } from "../../store/slice"
 
@@ -33,5 +32,3 @@ const MyBlogs = () => {
 }
 
 export default MyBlogs
-
-setLayout(MyBlogs, DashboardLayout)

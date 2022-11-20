@@ -3,8 +3,6 @@ import { Button } from "@mui/material"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { setLayout } from "../../lib"
-import DashboardLayout from "../../layoyts/dashboard"
 
 const AddBlog = () => {
   const [blog, setBlog] = useState({
@@ -30,5 +28,3 @@ const AddBlog = () => {
 }
 
 export default AddBlog
-
-setLayout(AddBlog, DashboardLayout)

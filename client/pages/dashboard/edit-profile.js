@@ -3,8 +3,6 @@ import { useSelector } from "react-redux"
 import { selectUser } from "../../store/slice"
 import { postFormData, postJSON } from "../../apis/clients"
 import { toast } from "react-toastify"
-import { setLayout } from "../../lib"
-import DashboardLayout from "../../layoyts/dashboard"
 
 const EditProfile = () => {
   const thisUser = useSelector(selectUser)
@@ -56,5 +54,3 @@ const EditProfile = () => {
 }
 
 export default EditProfile
-
-setLayout(EditProfile, DashboardLayout)

@@ -7,9 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import StateProvider from '../layoyts/provider'
 
 function MyApp({ Component, pageProps }) {
-
-  const getLayout = Component.getLayout ?? ((page) => page)
-
   return (
     <Provider store={store}>
       <StateProvider>
@@ -29,12 +26,11 @@ function MyApp({ Component, pageProps }) {
             pauseOnHover
             theme="colored"
             />
-            {getLayout(<Component {...pageProps} />)}
+            <Component {...pageProps} />
           </CssBaseline>
         </StateProvider>
     </Provider>
   )
-  
 }
 
 export default MyApp

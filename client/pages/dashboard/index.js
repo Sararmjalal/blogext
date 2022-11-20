@@ -1,5 +1,3 @@
-import { setLayout } from "../../lib"
-import DashboardLayout from "../../layoyts/dashboard"
 import { Button } from "@mui/material"
 import { removeCurrentUser } from "../../store/slice"
 import { useDispatch } from "react-redux"
@@ -17,5 +15,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-
-setLayout(Dashboard, DashboardLayout)

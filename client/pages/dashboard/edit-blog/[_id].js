@@ -4,8 +4,6 @@ import useSWR from "swr"
 import { useEffect, useState } from "react"
 import { Button } from "@mui/material"
 import { toast } from "react-toastify"
-import { setLayout } from "../../../lib"
-import DashboardLayout from "../../../layoyts/dashboard"
 
 const EditBlog = () => {
 
@@ -44,7 +42,7 @@ const EditBlog = () => {
     }
   }
 
-  if (!data) return <h1>Loading...</h1>
+  if (!thisBlog) return <h1>Loading...</h1>
   return (
     <div>
       <h1>{thisBlog.title}</h1>
@@ -56,5 +54,3 @@ const EditBlog = () => {
 }
 
 export default EditBlog
-
-setLayout(EditBlog, DashboardLayout)
