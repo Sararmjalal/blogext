@@ -13,7 +13,7 @@ export async function getStaticProps() {
   
 function Page({writers}) {
 
-  console.log(writers)
+  // console.log(writers)
   
   const signUp = async (username, name) => {
     const data = await(await postJSON(
@@ -21,12 +21,23 @@ function Page({writers}) {
     { username, name },
     false)
     ).json()
+
     
     if (data.msg) return alert("bemir")
     alert("afarin")
   }
+  const obj = {
+    ok: 'bye',
+    hamid: 'joon'
+  }
+  console.log()
   
-  return <CommentRate />
+  return (
+    <div>
+      <CommentRate />
+      <h1>Salam</h1>
+    </div>
+  )
 }
 
 export default Page

@@ -1,18 +1,25 @@
 import { toast } from "react-toastify"
 import { useToken } from "../lib"
+import { mutate } from "swr"
 
 export const fetcher = async (url, headers = {'Content-Type': 'application/json'}) => {
   const res = await (await fetch(url, {headers})).json()
   if (res.msg) throw new Error(res.msg)
   return res
 }
-    
+
+export const refetch = async (key, func) => {
+  await mutate(key, func, {revalidate: true})
+}
+
 export const postJSON = async (url, body, requireAuth = true) => {
 
   const headers = {
     'Content-Type': 'application/json',
   };
   if (requireAuth) headers.auth = useToken()
+
+  console.log('BODY IN POST JSON', body)
 
   const res = await fetch(url, {
     method: "POST",
@@ -25,11 +32,7 @@ export const postJSON = async (url, body, requireAuth = true) => {
 
 export const postMe = async () => {
   if (!useToken()) return toast.error('Something went wrong. Please try again!')
-  try {
-    return await postJSON(`${process.env.SERVER}/user/me`, {}, true)
-  } catch (error) {
-    toast.error("Server is closed or you're not one of us lool")
-  }
+  return await postJSON(`${process.env.SERVER}/user/me`, {}, true)
 }
 
 export const postFormData = async (url, formData) => await (await fetch(url, {

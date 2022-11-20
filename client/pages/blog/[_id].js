@@ -1,6 +1,7 @@
 import { getAllBlogs, getSingleBlog, getBlogComments } from "../../apis/statics"
 import { useTitle } from "../../lib"
 import Head from "next/head"
+import CommentSection from "../../components/blog/CommentSection"
 
 export async function getStaticPaths() {
   const blogs = await getAllBlogs()
@@ -13,21 +14,20 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(ctx) {
   const blog = await getSingleBlog(ctx.params._id)
-  const comments = await getBlogComments(ctx.params._id)
 
   if (blog.msg) return {
     notFound: true
   }
 
   return {
-    props: { blog, comments },
+    props: { blog },
     revalidate: 10
   }
 }
 
-const Blog = ({ blog, comments }) => {
+const Blog = ({ blog }) => {
   console.log(blog)
-  console.log('Comments', comments)
+
   return (
     <section>
     <Head>
@@ -36,6 +36,9 @@ const Blog = ({ blog, comments }) => {
     </Head>
       <div>
         <h1>Blog Yeay!</h1>
+        <div>
+          <CommentSection blogId={blog._id}/>
+        </div>
       </div>
   </section>
   )
