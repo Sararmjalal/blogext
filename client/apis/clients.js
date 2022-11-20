@@ -29,7 +29,7 @@ export const postJSON = async (url, body, requireAuth = true) => {
 }
 
 export const postMe = async () => {
-  if (!useToken()) return toast.error('Something went wrong. Please try again!')
+  if (!useToken()) return 
   return await postJSON(`${process.env.SERVER}/user/me`, {})
 }
 

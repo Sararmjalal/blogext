@@ -22,13 +22,6 @@ const MyBlogs = () => {
     ]
     , fetcher)
     
-  const onEdit = (blog) => {
-    dispatch(setCurrentBlog(blog))
-    router.push(`/dashboard/edit-blog/${blog._id}`)
-  }
-  
-  
-  if (error) console.log(error)
   if (!data) return <h1>Loading...</h1>
 
   return (

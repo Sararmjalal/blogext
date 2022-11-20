@@ -1,6 +1,7 @@
 import { postJSON } from '../../apis/clients'
 import { getTopWriters } from '../../apis/statics'
 import CommentRate from '../../components/blog/CommentRate'
+import Confirm from '../../components/modals/confirm'
 
 export async function getStaticProps() {
   const data = await getTopWriters()
@@ -35,6 +36,7 @@ function Page({writers}) {
   return (
     <div>
       <CommentRate />
+      <Confirm type="remove" blogId='btb-1668778461883946737' />
       <h1>Salam</h1>
     </div>
   )
