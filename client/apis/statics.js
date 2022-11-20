@@ -6,8 +6,10 @@ const getTopWriters = async () => await (await fetch(`${process.env.SERVER}/user
 
 const getAllBlogs = async () => await (await fetch(`${process.env.SERVER}/blog`)).json()
 
-const getSingleBlog = async(_id) => await (await fetch(`${process.env.SERVER}/blog/single-blog/${_id}`)).json()
+const getSingleBlog = async (_id) => await (await fetch(`${process.env.SERVER}/blog/single-blog/${_id}`)).json()
+
+const getBlogComments = async (_id) => await (await fetch(`${process.env.SERVER}/comment/by-blog/${_id}`)).json()
 
 const getTopBlogs = async () => await (await fetch(`${process.env.SERVER}/blog/top-blogs`)).json()
 
-export { getAllWriters, getSingleWriter, getTopWriters, getAllBlogs, getSingleBlog, getTopBlogs }
+export { getAllWriters, getSingleWriter, getTopWriters, getAllBlogs, getSingleBlog, getBlogComments, getTopBlogs }
