@@ -1,17 +1,19 @@
 import Head from 'next/head'
-import { CssBaseline } from '@mui/material'
 import { store } from '../store/store'
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
+import {blogextTheme} from '../styles/theme'
+import { ThemeProvider } from '@mui/material'
 import 'react-toastify/dist/ReactToastify.css';
 import StateProvider from '../layouts/provider'
 import '../styles/globals.css'
+
 
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <StateProvider>
-        <CssBaseline>
+        <ThemeProvider theme={blogextTheme}>
           <Head>
             <meta name="viewport" content="initial-scale=1, width=device-width" />
           </Head>
@@ -28,7 +30,7 @@ function MyApp({ Component, pageProps }) {
             theme="colored"
             />
             <Component {...pageProps} />
-          </CssBaseline>
+          </ThemeProvider>
         </StateProvider>
     </Provider>
   )

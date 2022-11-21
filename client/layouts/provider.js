@@ -25,7 +25,7 @@ const StateProvider = ({children}) => {
     setLoading(false)
   }
 
-  if (loading) return <Loading loading/>
+  if (loading) return <Loading />
   if (router.asPath.includes('dashboard')) return <DashboardLayout><main>{children}</main></DashboardLayout>
   return <MainLayout><main>{children}</main></MainLayout>
 }
