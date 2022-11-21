@@ -2,6 +2,8 @@ import { postJSON } from '../../apis/clients'
 import { getTopWriters } from '../../apis/statics'
 import CommentRate from '../../components/blog/CommentRate'
 import Confirm from '../../components/modals/confirm'
+import Loading from '../../components/main/Loading'
+import { useEffect, useState } from 'react'
 
 export async function getStaticProps() {
   const data = await getTopWriters()
@@ -15,29 +17,24 @@ export async function getStaticProps() {
 function Page({writers}) {
 
   // console.log(writers)
-  
-  const signUp = async (username, name) => {
-    const data = await(await postJSON(
-    'http://localhost:4000/user/signup',
-    { username, name },
-    false)
-    ).json()
 
-    
-    if (data.msg) return alert("bemir")
-    alert("afarin")
+  const [isDone, setIsDone] = useState(false)
+
+  const func = () => {
+    setIsDone(true)
   }
-  const obj = {
-    ok: 'bye',
-    hamid: 'joon'
-  }
-  console.log()
+
+  useEffect(() => {
+    setTimeout(func, 5000);
+  }, [])
+
   
   return (
     <div>
-      <CommentRate />
-      <Confirm type="remove" blogId='btb-1668778461883946737' />
-      <h1>Salam</h1>
+        <Loading isDone={isDone} />
+        <CommentRate />
+        <Confirm type="remove" blogId='btb-1668778461883946737' />
+        <h1>Salam</h1>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { Button } from "@mui/material"
 import { toast } from "react-toastify"
 import { useTitle } from "../../../lib"
 import Head from "next/head"
+import Loading from "../../../components/main/Loading"
 
 const EditBlog = () => {
 
@@ -44,7 +45,7 @@ const EditBlog = () => {
     }
   }
 
-  if (!thisBlog) return <h1>Loading...</h1>
+  if (!thisBlog) return <Loading />
   return (
     <section>
       <Head>

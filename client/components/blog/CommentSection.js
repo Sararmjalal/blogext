@@ -1,6 +1,7 @@
 import { fetcher } from "../../apis/clients"
 import useSWR from "swr"
 import CommentRate from "./CommentRate"
+import Loading from "../main/Loading"
 
 const CommentSection = ({ blogId }) => {
   
@@ -8,7 +9,7 @@ const CommentSection = ({ blogId }) => {
 
   const { data } = useSWR(swrKey, fetcher)
     
-  if(!data) return <h1>Loading...</h1>
+  if(!data) return <Loading />
   return (
       <div>
         {

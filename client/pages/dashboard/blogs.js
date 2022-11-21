@@ -1,17 +1,12 @@
-import { useRouter } from "next/router"
 import useSWR from "swr"
 import { fetcher } from "../../apis/clients"
-import { useToken } from "../../lib"
-import { useDispatch } from "react-redux"
-import { setCurrentBlog } from "../../store/slice"
-import { useTitle } from "../../lib"
+import { useToken, useTitle } from "../../lib"
 import Head from "next/head"
+import Loading from "../../components/main/Loading"
 
 
 const MyBlogs = () => {
 
-  const router = useRouter()
-  const dispatch = useDispatch()
   const { data, error } = useSWR(
     [
       `${process.env.SERVER}/blog/my-blogs`,
@@ -22,7 +17,7 @@ const MyBlogs = () => {
     ]
     , fetcher)
     
-  if (!data) return <h1>Loading...</h1>
+  if (!data) return <Loading />
 
   return (
   <section>

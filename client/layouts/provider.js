@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import DashboardLayout from "./dashboard"
 import MainLayout from './main'
+import Loading from "../components/main/Loading"
 
 const StateProvider = ({children}) => {
   
@@ -24,7 +25,7 @@ const StateProvider = ({children}) => {
     setLoading(false)
   }
 
-  if (loading) return <h1>Loading...</h1>
+  if (loading) return <Loading loading/>
   if (router.asPath.includes('dashboard')) return <DashboardLayout><main>{children}</main></DashboardLayout>
   return <MainLayout><main>{children}</main></MainLayout>
 }
