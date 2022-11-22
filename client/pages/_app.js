@@ -12,8 +12,8 @@ import '../styles/globals.css'
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
+      <ThemeProvider theme={blogextTheme}>
       <StateProvider>
-        <ThemeProvider theme={blogextTheme}>
           <Head>
             <meta name="viewport" content="initial-scale=1, width=device-width" />
           </Head>
@@ -30,8 +30,8 @@ function MyApp({ Component, pageProps }) {
             theme="colored"
             />
             <Component {...pageProps} />
-          </ThemeProvider>
         </StateProvider>
+      </ThemeProvider>
     </Provider>
   )
 }

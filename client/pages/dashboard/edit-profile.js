@@ -6,6 +6,7 @@ import { toast } from "react-toastify"
 import { useTitle } from "../../lib"
 import Head from "next/head"
 import { ButtonBase, Input } from "@mui/material"
+import Loading from "../../components/main/Loading"
 
 const EditProfile = () => {
   const thisUser = useSelector(selectUser)
@@ -45,8 +46,6 @@ const EditProfile = () => {
     }
   }
 
-  console.log({name: user.name, bio: user.bio})
-
   const editProfile = async () => {
     try {
       const res = await postJSON(`${process.env.SERVER}/user/edit`, {name: user.name, bio: user.bio})
@@ -59,7 +58,7 @@ const EditProfile = () => {
     }
   }
 
-  if(!user) return <h1>Loading...</h1>
+  if(!user) return <Loading />
   return (
     <section>
     <Head>

@@ -25,6 +25,22 @@ a {
   }
 }
 
+.paragraph {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 'regular';
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.blockquote{
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 'regular';
+  font-size: 32px;
+  line-height: 41px;
+}
+
 /* Loading Section Start */
 
 .LoadingContainer {
@@ -52,4 +68,9 @@ a {
 
 .dashboardNav {
   color: 'white';
+}
+
+/* Customize MUI classes */
+ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
+background-color: black;
 }
