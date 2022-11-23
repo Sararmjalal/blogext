@@ -2,8 +2,6 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -26,20 +24,37 @@ a {
 }
 
 .paragraph {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 'regular';
   font-size: 16px;
   line-height: 26px;
 }
 
 .blockquote{
-  font-family: 'Open Sans';
   font-style: italic;
-  font-weight: 'regular';
   font-size: 32px;
   line-height: 41px;
 }
+
+.buttonPrimary:hover, .buttonSecondary {
+  background-color: white;
+  color: black;
+  border: 1px solid black
+}
+
+.buttonSecondary {
+  background-color: white;
+  color: black;
+}
+
+.buttonPrimary, .buttonSecondary:hover {
+  width: 155px;
+  height: 55px;
+  box-sizing: border-box;
+  background-color: black;
+  color: white;
+  border-radius: 0;
+  border: 1px solid black
+}
+
 
 /* Loading Section Start */
 

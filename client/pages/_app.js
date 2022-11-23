@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import StateProvider from '../layouts/provider'
 import '../styles/globals.css'
 
-
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
@@ -28,8 +27,10 @@ function MyApp({ Component, pageProps }) {
             draggable
             pauseOnHover
             theme="colored"
-            />
+          />
+          <div>
             <Component {...pageProps} />
+          </div>
         </StateProvider>
       </ThemeProvider>
     </Provider>

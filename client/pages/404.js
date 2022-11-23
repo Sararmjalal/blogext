@@ -4,7 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useTitle } from '../lib';
 import { useRouter } from 'next/router';
 
-const Page = () => {
+const NotFound = () => {
   const router = useRouter()
 
   return (
@@ -55,4 +55,4 @@ const Page = () => {
   );
 }
 
-export default Page;
+export default NotFound;

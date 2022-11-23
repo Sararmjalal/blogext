@@ -3,6 +3,7 @@ import Button from '@mui/material/Button'
 import { useTitle } from '../lib'
 import { getTopWriters, getTopBlogs } from '../apis/statics'
 import Header from '../components/Main/Header'
+import { Typography } from '@mui/material'
 
 export async function getStaticProps() {
     const writers = await getTopWriters()
@@ -12,7 +13,7 @@ export async function getStaticProps() {
         writers,
         blogs
       },
-      revalidate: 84600 //roozanas
+      revalidate: 60 * 60 * 24   //roozanas
   }
 }
 
@@ -24,8 +25,9 @@ export default function Home({writers, blogs}) {
         <meta name="description" content="Simple Blog App with Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1 style={{ textAlign: "center" }}>Welcome Home!</h1>
-      <Button variant="contained">Hello World</Button>
+      <Typography component='h2' variant='h2'> WWWWWWWWWWWWWWWWiiiiiiiiiiiiiiiiiii wwwwwwwwwwwwwww</Typography>
+      <h1>Welcome Home!</h1>
+      <Button className='buttonPrimary' component="button" variant="button">Hello World</Button>
     </div>
   )
 }

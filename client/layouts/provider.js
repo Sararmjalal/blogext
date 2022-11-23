@@ -7,17 +7,15 @@ import { useRouter } from "next/router"
 import DashboardLayout from "./dashboard"
 import MainLayout from './main'
 import Loading from "../components/main/Loading"
-import localFont from '@next/font/local'
+import NotFound from "../pages/404"
 
-const myFont = localFont({ src: './fonts/CormorantGaramond-Bold.ttf' })
-
-const StateProvider = ({children}) => {
+const StateProvider = ({ children }) => {
+  
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
-    // if(router.pathname === "/_error") router.push('/404')
     if (useToken()) ifVerified()
     else setLoading(false)
   }, [])
@@ -29,8 +27,17 @@ const StateProvider = ({children}) => {
   }
 
   if (loading) return <Loading />
-  if (router.asPath.includes('dashboard')) return <DashboardLayout><main className={myFont.className}>{children}</main></DashboardLayout>
-  return <MainLayout><main className={myFont.className}>{children}</main></MainLayout>
+  return <main>
+          {
+          router.pathname === '_error' || router.pathname === '/404' ?
+            <MainLayout><NotFound /></MainLayout>
+            :
+            router.asPath.includes('dashboard') ?
+              <DashboardLayout><main>{children}</main></DashboardLayout>
+              :
+              <MainLayout><main >{children}</main></MainLayout>
+      }
+          </main>
 }
 
 export default StateProvider

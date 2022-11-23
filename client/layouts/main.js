@@ -1,13 +1,15 @@
 import Header from "../components/main/Header"
 import Footer from '../components/main/Footer'
+import { Container } from "@mui/material"
 
-const MainLayout = ({children}) => {
+const MainLayout = ({ children }) => {
+  
   return (
-    <section>
+    <section >
       <Header />
         <main>{children}</main>
        <Footer />
-      </section>
+    </section>
   )
 }
 
