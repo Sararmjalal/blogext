@@ -144,8 +144,7 @@ export const blogextTheme = createTheme({
         props: { variant: 'main' },
         style: {
           margin: { xs: "0 24px", md: "0 8%" },
-          padding: {md: '0'},
-          minHeight: 'calc(100vh - 366px)'
+          minHeight: 'calc(100vh - 336px)'
         }
       },
       {
@@ -216,7 +215,36 @@ export const blogextTheme = createTheme({
             color: secondary.main,
           }
         }
-      }]
+        },
+        {
+          props: { variant: 'cancel' },
+          style: {
+            width: '155px',
+            height: '45px',
+            background: secondary.main,
+            color: primary.main,
+            borderRadius: '0',
+            border: `1px solid ${secondary.main}`,
+            '&:hover': {
+              background: primary.main,
+              color: secondary.main,
+            }
+          }
+        },
+        {
+          props: { variant: 'yes' },
+          style: {
+            width: '155px',
+            height: '45px',
+            color: secondary.main,
+            border: `1px solid ${secondary.main}`,
+            borderRadius: '0',
+            '&:hover': {
+              background: secondary.main,
+              color: primary.main,
+            }
+          }
+        }]
     }
   }
 });

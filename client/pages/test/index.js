@@ -1,73 +1,54 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
+import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Container } from '@mui/system';
 
-import Link from 'next/link';
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 'max-content',
+  bgcolor: 'primary.main',
+  boxShadow: 24,
+  p: 4,
+};
 
-const drawerWidth = 240;
-
-function ResponsiveDrawer(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const menuItems = [
-    {
-      name: 'My Blogs',
-      path: '/dashboard/blogs'
-    },
-    {
-      name: 'Add Blog',
-      path: '/dashboard/add-blog'
-    },
-    {
-      name: 'Edit Profile',
-      path: '/dashboard/edit-profile'
-    },
-    {
-      name: 'Logout',
-      path: ''
-    },
-  ]
-
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {menuItems.map(({name, path}, index) => (
-          <Link passHref href={path}>
-          <ListItem key={name}>
-            <ListItemButton>
-              <ListItemText sx={{ "&:hover": { color: "secondary.main" } }} primary={name} />
-            </ListItemButton>
-          </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-    </div>
-  );
-
-  const container = window !== undefined ? () => window().document.body : undefined;
+export default function TransitionsModal() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
-    <Typography className='blockquote' variant='caption'>Hello I'm a blockqoute</Typography>
+    <div>
+      <Button onClick={handleOpen}>Open modal</Button>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography sx={{color:'secondary.main'}} id="transition-modal-title" variant="subtitle1" component="h2">
+              Are you sure you want to exit?
+            </Typography>
+            <Container disableGutters sx={{display:"flex", justyfyContent:"space-between", gap:'16px', mt:"30px"}}>
+              <Button variant="cancel">Cancel</Button>
+              <Button variant="yes">Yes</Button>
+            </Container>
+          </Box>
+        </Fade>
+      </Modal>
+    </div>
   );
 }
-
-export default ResponsiveDrawer;

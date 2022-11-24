@@ -58,7 +58,7 @@ function Appbar({hasMenu = true, handleDrawerToggle }) {
           gridTemplateColumns: "50% 50%",
           ml: hasMenu ? { sm: "240px" } : "0",
           p: "0px 15px",
-          minHeight: {sm: "56px"}
+          minHeight: { sm: "56px" },
         }}>
         <Box sx={{ width: "100%" }}>
           {
