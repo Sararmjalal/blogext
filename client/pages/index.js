@@ -13,7 +13,7 @@ export async function getStaticProps() {
         writers,
         blogs
       },
-      revalidate: 60 * 60 * 24   //roozanas
+      revalidate: 60 * 60 * 24 
   }
 }
 
@@ -27,7 +27,7 @@ export default function Home({writers, blogs}) {
       </Head>
       <Typography component='h2' variant='h2'> WWWWWWWWWWWWWWWWiiiiiiiiiiiiiiiiiii wwwwwwwwwwwwwww</Typography>
       <h1>Welcome Home!</h1>
-      <Button className='buttonPrimary' component="button" variant="button">Hello World</Button>
+      <Button variant="secondaryButton">Hello World</Button>
     </div>
   )
 }

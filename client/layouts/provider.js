@@ -13,7 +13,7 @@ const StateProvider = ({ children }) => {
   
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
-  const router = useRouter()
+  const {pathname, asPath} = useRouter()
 
   useEffect(() => {
     if (useToken()) ifVerified()
@@ -29,10 +29,10 @@ const StateProvider = ({ children }) => {
   if (loading) return <Loading />
   return <main>
           {
-          router.pathname === '_error' || router.pathname === '/404' ?
+          (pathname === '_error' || pathname === '/404') && pathname !== '/dashboard'?
             <MainLayout><NotFound /></MainLayout>
             :
-            router.asPath.includes('dashboard') ?
+            asPath.includes('dashboard') ?
               <DashboardLayout><main>{children}</main></DashboardLayout>
               :
               <MainLayout><main >{children}</main></MainLayout>

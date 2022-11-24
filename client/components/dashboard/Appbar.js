@@ -11,6 +11,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../store/slice';
 
 const menuItems = [
   {
@@ -33,6 +35,7 @@ const menuItems = [
 
 function Appbar({hasMenu = true, handleDrawerToggle }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const {avatar} = useSelector(selectUser)
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -75,7 +78,7 @@ function Appbar({hasMenu = true, handleDrawerToggle }) {
         <Box sx={{display:"flex", justifyContent: "end"}}>
             <Tooltip title="Open Settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Writer profile picture" src={`${process.env.SERVER}/${avatar}`} />
               </IconButton>
             </Tooltip>
           <Menu

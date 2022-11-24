@@ -3,7 +3,7 @@ import { store } from '../store/store'
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import {blogextTheme} from '../styles/theme'
-import { ThemeProvider } from '@mui/material'
+import { ThemeProvider, CssBaseline  } from '@mui/material'
 import 'react-toastify/dist/ReactToastify.css';
 import StateProvider from '../layouts/provider'
 import '../styles/globals.css'
@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <ThemeProvider theme={blogextTheme}>
+      <CssBaseline />
       <StateProvider>
           <Head>
             <meta name="viewport" content="initial-scale=1, width=device-width" />

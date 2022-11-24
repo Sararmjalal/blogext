@@ -7,6 +7,7 @@ import { setCurrentUser, selectUser } from "../store/slice"
 import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
 import Head from "next/head"
+import Loading from "../components/main/Loading"
 
 const SignIn = () => {
   const router = useRouter()
@@ -15,7 +16,7 @@ const SignIn = () => {
   const thisUser = useSelector(selectUser)
 
   useEffect(() => {
-    thisUser ? router.push('/dashboard') : setLoading(false)
+    thisUser ? router.push('/dashboard/blogs') : setLoading(false)
   }, [])
 
   const signup = async (body) => {
@@ -25,7 +26,7 @@ const SignIn = () => {
       setToken(res.token)
       const user = await postMe()
       dispatch(setCurrentUser(user))
-      router.push('/dashboard')
+      router.push('/dashboard/blogs')
       toast.success("You've logged in successfully!")
     }
     catch (error) {
@@ -50,7 +51,7 @@ const SignIn = () => {
       const user = await postMe()
       if(!user) return
       dispatch(setCurrentUser(user))
-      router.push('/dashboard')
+      router.push('/dashboard/blogs')
       toast.success("You've logged in successfully!")
     }
     catch (error) {
@@ -58,6 +59,7 @@ const SignIn = () => {
     }
   }
 
+  if(loading) return <Loading />
   return (
     <section>
       <Head>

@@ -27,16 +27,34 @@ const openSans = localFont({
   ]
 })
 
+const color = {
+  background: {
+    default: '#F2F2F2'
+  },
+  primary: {
+    main: '#000000'
+  },
+  secondary: {
+    main: '#ffffff',
+  },
+  gray: '#949799'
+}
+
+const {background, primary, secondary, gray} = color
+
 export const blogextTheme = createTheme({
   palette: {
-    background: {
-      default: "#F1F4F5"
-    },
-    primary: {
-      main: '#000000',
-    },
-    secondary: {
-      main: '#ffffff',
+    background,
+    primary,
+    secondary,
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1440,
     },
   },
   typography: {
@@ -59,42 +77,48 @@ export const blogextTheme = createTheme({
       fontWeight: "400",
       fontSize: '64px',
       lineHeight: '80px',
-      fontStyle: "normal"
+      fontStyle: "normal",
+      color: primary.main,
     },
     h2: {
       fontFamily: cormorantGaramond.style.fontFamily,
       fontWeight: "400",
       fontSize: '52px',
       lineHeight: '80px',
-      fontStyle: "normal"
+      fontStyle: "normal",
+      color: primary.main,
     },
     h3: {
       fontFamily: cormorantGaramond.style.fontFamily,
       fontWeight: "400",
       fontSize: '36px',
       lineHeight: '80px',
-      fontStyle: "normal"
+      fontStyle: "normal",
+      color: primary.main,
     },
     h4: {
       fontFamily: cormorantGaramond.style.fontFamily,
       fontWeight: "400",
       fontSize: '24px',
       lineHeight: '80px',
-      fontStyle: "normal"
+      fontStyle: "normal",
+      color: primary.main,
     },
     subtitle1: {
       fontFamily: openSans.style.fontFamily,
       fontWeight: '400',
       fontSize: '21px',
       lineHeight: '32px',
-      fontStyle: "normal"
+      fontStyle: "normal",
+      color: gray,
     },
     subtitle2: {
       fontFamily: openSans.style.fontFamily,
       fontWeight: '400',
       fontSize: '18x',
       lineHeight: '26px',
-      fontStyle: "normal"
+      fontStyle: "normal",
+      color: gray,
     },
     button: {
       fontFamily: openSans.style.fontFamily,
@@ -102,16 +126,99 @@ export const blogextTheme = createTheme({
       fontWeight: '700',
       fontSize: '16px',
       lineHeight: '24px',
-      fontStyle: "normal"
+      fontStyle: "normal",
+      color: primary.main,
     },
     caption: {
       fontFamily: openSans.style.fontFamily,
       fontWeight: '300',
       fontSize: '14px',
       lineHeight: '19px',
-      fontStyle: "normal"
+      fontStyle: "normal",
+      color: primary.main,
     },
   },
+  components: {
+    MuiContainer: {
+      variants: [{
+        props: { variant: 'main' },
+        style: {
+          margin: { xs: "0 24px", md: "0 8%" },
+          padding: {md: '0'},
+          minHeight: 'calc(100vh - 366px)'
+        }
+      },
+      {
+        props: { variant: 'contained' },
+        style: {
+          margin: { xs: "0 24px", md: "0 8%" },
+          padding: {md: '0'},
+        }
+      }]
+    },
+    MuiTypography: {
+      variants: [{
+        props: { variant: "p" },
+        style: {
+          fontFamily: openSans.style.fontFamily,
+          fontSize: '16px',
+          lineSeight: '26px',
+          color: primary.main,
+        }
+      },
+      {
+        props: { variant: "blockquote" },
+        style: {
+          fontFamily: openSans.style.fontFamily,
+          fontStyle: 'italic',
+          fontSize: '32px',
+          lineHeight: '41px',
+          color: primary.main,
+        }
+        },
+        {
+        props: { variant: "logo" },
+        style: {
+          fontFamily: cormorantGaramond.style.fontFamily,
+          fontWeight: '700',
+          fontSize: '32px',
+          lineHeight: '39px',
+          color: primary.main,
+        }
+      },]
+    },
+    MuiButton: {
+      variants: [{
+        props: { variant: 'primaryButton' },
+        style: {
+          width: '155px',
+          height: '55px',
+          background: primary.main,
+          color: secondary.main,
+          borderRadius: '0',
+          border: `1px solid ${primary.main}`,
+          '&:hover': {
+            background: '#00000000',
+            color: primary.main,
+          }
+        }
+      },
+      {
+        props: { variant: 'secondaryButton' },
+        style: {
+          width: '155px',
+          height: '55px',
+          background: secondary.main,
+          color: primary.main,
+          borderRadius: '0',
+          '&:hover': {
+            background: primary.main,
+            color: secondary.main,
+          }
+        }
+      }]
+    }
+  }
 });
 
 console.log("CREATE THENE", createTheme())
