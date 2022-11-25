@@ -51,3 +51,19 @@ background-color: black;
   border:'none';
   border-radius: 0;
 }
+
+.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-do3tkx-MuiInputBase-root-MuiInput-root {
+  width: 100%;
+}
+
+.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-do3tkx-MuiInputBase-root-MuiInput-root::before {
+  border-bottom: 2px solid #dce4e7;
+}
+
+.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-multiline.css-14nrzf1-MuiInputBase-root-MuiInput-root {
+  width: 100%;
+}
+
+.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-multiline.css-14nrzf1-MuiInputBase-root-MuiInput-root::before {
+  border-bottom: 2px solid #dce4e7;
+}

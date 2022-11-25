@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 import { useTitle } from "../../../lib"
 import Head from "next/head"
 import Loading from "../../../components/main/Loading"
+import AddEditBlog from "../../../components/blog/AddEditBlog"
 
 const EditBlog = () => {
 
@@ -47,17 +48,13 @@ const EditBlog = () => {
 
   if (!thisBlog) return <Loading />
   return (
-    <section>
-      <Head>
-       <title>{useTitle('Edit Blog')}</title>
-      </Head>
-      <div>
-        <h1>{thisBlog.title}</h1>
-        <h2>{thisBlog.content}</h2>
-        <h3>{thisBlog.imgurl}</h3>
-        <Button onClick={edit}>Edit blog</Button>
-      </div>
-    </section>
+    <AddEditBlog 
+    type='edit'
+    title='Edit Blog'
+    blog={thisBlog}
+    setBlog={setThisBlog}
+    edit={edit}
+    />
   )
 }
 

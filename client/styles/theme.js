@@ -189,6 +189,7 @@ export const blogextTheme = createTheme({
       variants: [{
         props: { variant: 'primaryButton' },
         style: {
+          fontFamily: openSans.style.fontFamily,
           width: '155px',
           height: '55px',
           background: primary.main,
@@ -204,6 +205,7 @@ export const blogextTheme = createTheme({
       {
         props: { variant: 'secondaryButton' },
         style: {
+          fontFamily: openSans.style.fontFamily,
           width: '155px',
           height: '55px',
           background: secondary.main,
@@ -218,7 +220,8 @@ export const blogextTheme = createTheme({
         {
           props: { variant: 'cancel' },
           style: {
-            width: '155px',
+            fontFamily: openSans.style.fontFamily,
+            width: '48%',
             height: '45px',
             background: secondary.main,
             color: primary.main,
@@ -233,7 +236,8 @@ export const blogextTheme = createTheme({
         {
           props: { variant: 'yes' },
           style: {
-            width: '155px',
+            fontFamily: openSans.style.fontFamily,
+            width: '48%',
             height: '45px',
             color: secondary.main,
             border: `1px solid ${secondary.main}`,
@@ -243,7 +247,45 @@ export const blogextTheme = createTheme({
               color: primary.main,
             }
           }
-        }],
+        },
+        {
+          props: { variant: 'linkAlike' },
+          style: {
+            fontFamily: openSans.style.fontFamily,
+            fontSize: "12px",
+            fontWeight: '300',
+            width: '40px',
+            height: '25px',
+            color: primary.main,
+            border: `1px solid ${primary.main}`,
+            borderRadius: '0',
+            '&:hover': {
+              background: primary.main,
+              color: secondary.main,
+              fontWeight: '400'
+            }
+          }
+        },
+        {
+          props: { variant: 'linkAlikeBlack' },
+          style: {
+            fontFamily: openSans.style.fontFamily,
+            fontSize: "12px",
+            fontWeight: '300',
+            width: '40px',
+            height: '25px',
+            color: secondary.main,
+            border: `1px solid ${primary.main}`,
+            borderRadius: '0',
+            background: primary.main,
+            '&:hover': {
+              background: secondary.main,
+              color: primary.main,
+              fontWeight: '400'
+            }
+          }
+        },
+      ],
     }
   }
 });

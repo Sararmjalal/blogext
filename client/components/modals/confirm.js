@@ -35,6 +35,7 @@ const ConfirmModal = ({ openConfirm, handleOpenConfirm, handleCloseConfirm , typ
   } 
 
   const remove = async () => {
+    handleCloseConfirm()
     try {
       const res = await postJSON(`${process.env.SERVER}/blog/delete`, { blogId })
       if (res.msg !== 'ok') return toast.error("Something went wrong. Please try again!")

@@ -5,14 +5,14 @@ import { postFormData, postJSON } from "../../apis/clients"
 import { toast } from "react-toastify"
 import { useTitle } from "../../lib"
 import Head from "next/head"
-import {Container, TextField, Typography, Divider, Button} from "@mui/material"
+import {Container, TextField, Typography, Divider, Button, Tooltip} from "@mui/material"
 import Loading from "../../components/main/Loading"
+import Image from "next/image"
 
 const EditProfile = () => {
   const thisUser = useSelector(selectUser)
   const [user, setUser] = useState(null)
   const [file, setFile] = useState(null)
-  const [img, setImg] = useState(null)
 
   useEffect(() => {
     setUser({
@@ -20,7 +20,6 @@ const EditProfile = () => {
       bio: thisUser.bio,
       avatar: `${process.env.SERVER}/${thisUser.avatar}`
     })
-    setImg(thisUser.avatar)
   }, [thisUser])
 
   useEffect(() => {
@@ -28,7 +27,6 @@ const EditProfile = () => {
       const fileReader = new FileReader()
       fileReader.onload = function (e) {
         setUser({...user, avatar:e.target.result})
-        setImg(e.target.result)
       }
       fileReader.readAsDataURL(file)
     }
@@ -76,13 +74,26 @@ const EditProfile = () => {
             gap: '20px',
             alignItems: "start"
           }}>
+          <Tooltip title="Click to change">
+              <Container
+                disableGutters
+                maxWidth='100%'          
+                sx={{position:'relative', height: '500px', width: { xs: '100%', md: '48%' }, margin: "0"}}
+                >
+              <label htmlFor="fileInput">
+                <Image
+                  src={user.avatar}
+                  alt="Writer profile picture"
+                  fill={true}
+                  style={{objectFit:"cover", cursor:"pointer"}}
+                  />
+              </label>
+              </Container>
+            </Tooltip>
           <Container
             disableGutters
             maxWidth='100%'
-            sx={{
-              display: {xs:'block', sm:"flex"},
-              justifyContent: "space-between"
-            }}>
+            >
           <TextField
             type='text'
             variant='standard'
@@ -91,6 +102,7 @@ const EditProfile = () => {
               '&::before': {
                 borderBottom: '2px solid #dce4e7',
               },
+              display:"block",
               width: { xs: '100%', md: '48%' },
               margin:{xs: '10px 0', sm: '0'},
               fontSize: '16px',
@@ -102,27 +114,27 @@ const EditProfile = () => {
             <TextField
               type='text'
               variant='standard'
-              placeholder="Image url..."
+              placeholder="Tell us more about yourself..."
+              multiline={true}
+              rows='4'
               sx={{
                 '&::before': {
                   borderBottom: '2px solid #dce4e7',
                 },
+                display:"block",
                 width: { xs: '100%', md: '48%' },
                 margin:{xs: '10px 0', sm: '0'},
                 fontSize: '16px',
                 lineHeight: '26px',
               }}
               value={user.bio}
-              onChange={(e) => setUser({ ...user, bio: e.target.value })} 
+              onChange={(e) => setUser({ ...user, bio: e.target.value.slice(0, 200) })} 
              />
           </Container>
           <Button variant="primaryButton" onClick={editProfile}>Edit</Button>
         </Container>
     </Container>
-      <div>
-        <input type='file' onChange={(e) => setFile(e.target.files[0])}></input>
-        <img src={user.avatar} style={{ height: "100px", width: "100px" }}></img>
-      </div>
+        <input hidden type='file' id='fileInput' onChange={(e) => setFile(e.target.files[0])}></input>
   </section>
   )
 }
