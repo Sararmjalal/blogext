@@ -19,8 +19,8 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 'max-content',
   bgcolor: 'primary.main',
-  boxShadow: 24,
   p: 4,
+  border:'none'
 };
 
 const ConfirmModal = ({ openConfirm, handleOpenConfirm, handleCloseConfirm , type, blogId }) => {

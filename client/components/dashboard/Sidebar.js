@@ -10,37 +10,20 @@ import { useRouter } from 'next/router';
 
 const drawerWidth = 240;
 
-const menuItems = [
-  {
-    name: 'My Blogs',
-    path: '/dashboard/blogs'
-  },
-  {
-    name: 'Add Blog',
-    path: '/dashboard/add-blog'
-  },
-  {
-    name: 'Edit Profile',
-    path: '/dashboard/edit-profile'
-  },
-  {
-    name: 'Logout',
-    path: ''
-  },
-]
+function Sidebar({ handleDrawerToggle, mobileOpen, handleOpenConfirm, menuItemsDashboard }) {
 
-function Sidebar({ handleDrawerToggle, mobileOpen, handleOpenConfirm }) {
-  const router = useRouter()
+  const {pathname} = useRouter()
+
   const drawer = (
     <div>
       <Toolbar sx={{minHeight: {sm: "56px"}}}/>
       <List>
-        {menuItems.map(({name, path}, index) => (
+        {menuItemsDashboard.map(({name, path}) => (
           <Link
             key={name.trim()}
             passHref
             href={path}
-            style={router.pathname === path ? { color: "white" } : { color: "inherit" }}
+            style={pathname === path ? { color: "white" } : { color: "inherit" }}
             onClick={name === 'Logout' && handleOpenConfirm}
           >
           <ListItem>

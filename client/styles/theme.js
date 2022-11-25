@@ -153,7 +153,14 @@ export const blogextTheme = createTheme({
           margin: { xs: "0 24px", md: "0 8%" },
           padding: {md: '0'},
         }
-      }]
+        },
+        {
+          props: { variant: 'dashboard' },
+          style: {
+            margin: { xs: "0 24px", md: "0 8%" },
+            padding: {md: '0'},
+          }
+        }]
     },
     MuiTypography: {
       variants: [{

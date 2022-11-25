@@ -6,7 +6,7 @@ import Loading from "../components/main/Loading"
 import Sidebar from "../components/dashboard/Sidebar"
 import Appbar from "../components/dashboard/Appbar"
 import ConfirmModal from "../components/modals/confirm"
-const DashboardLayout = ({children, openConfirm, handleOpenConfirm, handleCloseConfirm}) => {
+const DashboardLayout = ({children, openConfirm, handleOpenConfirm, handleCloseConfirm, menuItemsDashboard}) => {
   
   const router = useRouter()
   const thisUser = useSelector(selectUser)
@@ -23,13 +23,16 @@ const DashboardLayout = ({children, openConfirm, handleOpenConfirm, handleCloseC
   if (!thisUser) return <Loading />
   return (
     <>
-      <Appbar
+      <Appbar 
         handleDrawerToggle={handleDrawerToggle}
-        handleOpenConfirm={handleOpenConfirm} />
+        handleOpenConfirm={handleOpenConfirm}
+        menuItemsDashboard={menuItemsDashboard}
+      />
       <Sidebar
         handleDrawerToggle={handleDrawerToggle}
         mobileOpen={mobileOpen}
         handleOpenConfirm={handleOpenConfirm}
+        menuItemsDashboard={menuItemsDashboard}
       />
       <ConfirmModal
         openConfirm={openConfirm}

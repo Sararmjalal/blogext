@@ -14,38 +14,17 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../store/slice';
 
-const menuItems = [
-  {
-    name: 'My Blogs',
-    path: '/dashboard/blogs'
-  },
-  {
-    name: 'Add Blog',
-    path: '/dashboard/add-blog'
-  },
-  {
-    name: 'Edit Profile',
-    path: '/dashboard/edit-profile'
-  },
-  {
-    name: 'Logout',
-    path: ''
-  },
-]
+function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuItemsDashboard }) {
 
-function Appbar({hasMenu = true, handleDrawerToggle, handleOpenConfirm }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const {avatar} = useSelector(selectUser)
-
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  const router = useRouter()
+  const {pathname} = useRouter()
 
   return (
     <AppBar
@@ -98,11 +77,11 @@ function Appbar({hasMenu = true, handleDrawerToggle, handleOpenConfirm }) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-            {menuItems.map(({ name, path }) => (
+            {menuItemsDashboard.map(({ name, path }) => (
               <Link
                 key={name.trim()}
                 passHref href={path}
-                style={router.pathname === path ? { color: "white" } : { color: "gray" }}
+                style={pathname === path ? { color: "white" } : { color: "gray" }}
                 onClick={name === 'Logout' && handleOpenConfirm}
               >
                   <MenuItem

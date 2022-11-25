@@ -15,7 +15,30 @@ const StateProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false)
-  const {pathname, asPath} = useRouter()
+  const { pathname, asPath } = useRouter()
+  
+  const menuItemsDashboard = [
+    {
+      name: 'View Site',
+      path: '/'
+    },
+    {
+      name: 'My Blogs',
+      path: '/dashboard/blogs'
+    },
+    {
+      name: 'Add Blog',
+      path: '/dashboard/add-blog'
+    },
+    {
+      name: 'Edit Profile',
+      path: '/dashboard/edit-profile'
+    },
+    {
+      name: 'Logout',
+      path: ''
+    },
+  ]
 
   useEffect(() => {
     if (useToken()) ifVerified()
@@ -32,25 +55,27 @@ const StateProvider = ({ children }) => {
   return <main>
           {
       (pathname === '_error' || pathname === '/404') && pathname !== '/dashboard'?
-      <MainLayout
-      open={open}
-      handleOpen={() => setOpen(true)}
-      handleClose={() => setOpen(false)}
-      openConfirm={openConfirm}
-      handleOpenConfirm={() => setOpenConfirm(true)}
-      handleCloseConfirm={() => setOpenConfirm(false)}
+          <MainLayout
+          open={open}
+          handleOpen={() => setOpen(true)}
+          handleClose={() => setOpen(false)}
+          openConfirm={openConfirm}
+          handleOpenConfirm={() => setOpenConfirm(true)}
+          handleCloseConfirm={() => setOpenConfirm(false)}
+          menuItemsDashboard={menuItemsDashboard}
       >
         <NotFound />
       </MainLayout>
         :
         asPath.includes('dashboard') ?
-          <DashboardLayout
-          openConfirm={openConfirm}
-          handleOpenConfirm={() => setOpenConfirm(true)}
-          handleCloseConfirm={() => setOpenConfirm(false)}
-          >
-            <main>{children}</main>
-          </DashboardLayout>
+            <DashboardLayout
+            openConfirm={openConfirm}
+            handleOpenConfirm={() => setOpenConfirm(true)}
+            handleCloseConfirm={() => setOpenConfirm(false)}
+            menuItemsDashboard={menuItemsDashboard}
+            >
+              <main>{children}</main>
+            </DashboardLayout>
             :
           <MainLayout
             open={open}
@@ -59,6 +84,7 @@ const StateProvider = ({ children }) => {
             openConfirm={openConfirm}
             handleOpenConfirm={() => setOpenConfirm(true)}
             handleCloseConfirm={() => setOpenConfirm(false)}
+            menuItemsDashboard={menuItemsDashboard}
           >
             <main >{children}</main>
           </MainLayout>

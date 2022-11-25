@@ -4,7 +4,7 @@ import { Container } from "@mui/material"
 import MenuModal from "../components/modals/menu"
 import ConfirmModal from "../components/modals/confirm"
 
-const MainLayout = ({ children, open, handleOpen, handleClose, openConfirm, handleOpenConfirm, handleCloseConfirm }) => {
+const MainLayout = ({ children, open, handleOpen, handleClose, openConfirm, handleOpenConfirm, handleCloseConfirm, menuItemsDashboard }) => {
   
   const menuItems = [
     {
@@ -23,7 +23,7 @@ const MainLayout = ({ children, open, handleOpen, handleClose, openConfirm, hand
       name: 'My Account',
       path: '/dashboard/blogs'
     },
-  ]
+  ] 
 
 
   return (
@@ -34,6 +34,7 @@ const MainLayout = ({ children, open, handleOpen, handleClose, openConfirm, hand
         handleOpenConfirm={handleOpenConfirm}
         isOpen={open}
         isLight={!open}
+        menuItemsDashboard={menuItemsDashboard}
       />
       <MenuModal
         open={open}

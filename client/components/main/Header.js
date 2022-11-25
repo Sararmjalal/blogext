@@ -6,14 +6,18 @@ import { Container } from "@mui/system"
 import { Grid, Typography,Tooltip } from "@mui/material"
 import {MenuSharp, CloseSharp, LoginSharp, LogoutSharp} from '@mui/icons-material';
 
-const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose, handleOpenConfirm }) => {
+const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose, handleOpenConfirm, menuItemsDashboard }) => {
   
   const thisUser = useSelector(selectUser)
   
   return (
     <Container sx={{color: isLight ? 'primary.main' : 'secondary.main'}} maxWidth={false} disableGutters>
       {
-        thisUser && <Appbar hasMenu={false} handleOpenConfirm={handleOpenConfirm} />
+        thisUser &&
+        <Appbar
+          hasMenu={false}
+          handleOpenConfirm={handleOpenConfirm}
+          menuItemsDashboard={menuItemsDashboard} />
       }
       <Container variant='contained' maxWidth='xl'
         sx={{
