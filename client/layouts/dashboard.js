@@ -6,6 +6,8 @@ import Loading from "../components/main/Loading"
 import Sidebar from "../components/dashboard/Sidebar"
 import Appbar from "../components/dashboard/Appbar"
 import ConfirmModal from "../components/modals/confirm"
+import { Container } from "@mui/system"
+
 const DashboardLayout = ({children, openConfirm, handleOpenConfirm, handleCloseConfirm, menuItemsDashboard}) => {
   
   const router = useRouter()
@@ -40,7 +42,14 @@ const DashboardLayout = ({children, openConfirm, handleOpenConfirm, handleCloseC
         handleCloseConfirm={handleCloseConfirm}
         type="logout"  
       />
-      <main>{children}</main>
+      <Container
+        disableGutters
+        maxWidth='lg'
+        variant='main'
+        sx={{ pl: { xs: '10px', sm: '270px' }, pr: {xs:'10px', sm:"auto"}, mt: "17px", margin: '0' }}
+      >
+        {children}
+      </Container>
     </>
   )
 }

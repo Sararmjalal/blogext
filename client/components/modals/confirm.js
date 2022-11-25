@@ -47,7 +47,6 @@ const ConfirmModal = ({ openConfirm, handleOpenConfirm, handleCloseConfirm , typ
 
   return (
     <div>
-      <Button onClick={handleOpenConfirm}>Open modal</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

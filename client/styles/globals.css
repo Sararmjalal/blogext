@@ -46,3 +46,8 @@ a {
 ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
 background-color: black;
 }
+
+.tox.tox-tinymce {
+  border:'none';
+  border-radius: 0;
+}

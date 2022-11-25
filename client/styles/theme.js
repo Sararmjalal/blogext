@@ -151,15 +151,7 @@ export const blogextTheme = createTheme({
         props: { variant: 'contained' },
         style: {
           margin: { xs: "0 24px", md: "0 8%" },
-          padding: {md: '0'},
         }
-        },
-        {
-          props: { variant: 'dashboard' },
-          style: {
-            margin: { xs: "0 24px", md: "0 8%" },
-            padding: {md: '0'},
-          }
         }]
     },
     MuiTypography: {
@@ -168,7 +160,7 @@ export const blogextTheme = createTheme({
         style: {
           fontFamily: openSans.style.fontFamily,
           fontSize: '16px',
-          lineSeight: '26px',
+          lineHeight: '26px',
           color: primary.main,
         }
       },
@@ -251,7 +243,7 @@ export const blogextTheme = createTheme({
               color: primary.main,
             }
           }
-        }]
+        }],
     }
   }
 });

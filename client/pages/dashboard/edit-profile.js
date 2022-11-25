@@ -5,7 +5,7 @@ import { postFormData, postJSON } from "../../apis/clients"
 import { toast } from "react-toastify"
 import { useTitle } from "../../lib"
 import Head from "next/head"
-import { ButtonBase, Input } from "@mui/material"
+import {Container, TextField, Typography, Divider, Button} from "@mui/material"
 import Loading from "../../components/main/Loading"
 
 const EditProfile = () => {
@@ -63,15 +63,65 @@ const EditProfile = () => {
     <section>
     <Head>
       <title>{useTitle('My Profile')}</title>
-    </Head>
+      </Head>
+      <Container disableGutters sx={{mb:{xs:"40px", sm: '0'}}}>
+        <Typography component='h1' variant='h2'>Edit Profile</Typography>
+        <Divider sx={{ margin: '10px 0 20px 0' }} />
+        <Container
+          disableGutters
+          maxWidth='100%'
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: '20px',
+            alignItems: "start"
+          }}>
+          <Container
+            disableGutters
+            maxWidth='100%'
+            sx={{
+              display: {xs:'block', sm:"flex"},
+              justifyContent: "space-between"
+            }}>
+          <TextField
+            type='text'
+            variant='standard'
+            placeholder="Name..."
+            sx={{
+              '&::before': {
+                borderBottom: '2px solid #dce4e7',
+              },
+              width: { xs: '100%', md: '48%' },
+              margin:{xs: '10px 0', sm: '0'},
+              fontSize: '16px',
+              lineHeight: '26px',
+              }}
+              value={user.name}
+              onChange={(e) => setUser({ ...user, name: e.target.value })} 
+            />
+            <TextField
+              type='text'
+              variant='standard'
+              placeholder="Image url..."
+              sx={{
+                '&::before': {
+                  borderBottom: '2px solid #dce4e7',
+                },
+                width: { xs: '100%', md: '48%' },
+                margin:{xs: '10px 0', sm: '0'},
+                fontSize: '16px',
+                lineHeight: '26px',
+              }}
+              value={user.bio}
+              onChange={(e) => setUser({ ...user, bio: e.target.value })} 
+             />
+          </Container>
+          <Button variant="primaryButton" onClick={editProfile}>Edit</Button>
+        </Container>
+    </Container>
       <div>
-        <h1>Edit Profile Yeay!</h1>
         <input type='file' onChange={(e) => setFile(e.target.files[0])}></input>
         <img src={user.avatar} style={{ height: "100px", width: "100px" }}></img>
-        <Input onChange={(e) => setUser({ ...user, name: e.target.value })} value={user.name}></Input>
-        <Input onChange={(e) => setUser({ ...user, bio: e.target.value })} value={user.bio}></Input>
-        <p>{thisUser.name}</p>
-        <ButtonBase onClick={editProfile}>Update Name</ButtonBase>
       </div>
   </section>
   )
