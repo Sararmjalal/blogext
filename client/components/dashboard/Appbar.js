@@ -33,7 +33,7 @@ const menuItems = [
   },
 ]
 
-function Appbar({hasMenu = true, handleDrawerToggle }) {
+function Appbar({hasMenu = true, handleDrawerToggle, handleOpenConfirm }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const {avatar} = useSelector(selectUser)
 
@@ -99,7 +99,12 @@ function Appbar({hasMenu = true, handleDrawerToggle }) {
               onClose={handleCloseUserMenu}
             >
             {menuItems.map(({ name, path }) => (
-                <Link key={name.trim()} passHref href={path} style={router.pathname === path ? {color: "white"} : {color: "gray"}}>
+              <Link
+                key={name.trim()}
+                passHref href={path}
+                style={router.pathname === path ? { color: "white" } : { color: "gray" }}
+                onClick={name === 'Logout' && handleOpenConfirm}
+              >
                   <MenuItem
                     sx={{
                       "&:hover": { color: "secondary.main", bgcolor: "inherit" },

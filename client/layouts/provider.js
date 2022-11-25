@@ -13,6 +13,8 @@ const StateProvider = ({ children }) => {
   
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
+  const [open, setOpen] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false)
   const {pathname, asPath} = useRouter()
 
   useEffect(() => {
@@ -29,13 +31,37 @@ const StateProvider = ({ children }) => {
   if (loading) return <Loading />
   return <main>
           {
-          (pathname === '_error' || pathname === '/404') && pathname !== '/dashboard'?
-            <MainLayout><NotFound /></MainLayout>
+      (pathname === '_error' || pathname === '/404') && pathname !== '/dashboard'?
+      <MainLayout
+      open={open}
+      handleOpen={() => setOpen(true)}
+      handleClose={() => setOpen(false)}
+      openConfirm={openConfirm}
+      handleOpenConfirm={() => setOpenConfirm(true)}
+      handleCloseConfirm={() => setOpenConfirm(false)}
+      >
+        <NotFound />
+      </MainLayout>
+        :
+        asPath.includes('dashboard') ?
+          <DashboardLayout
+          openConfirm={openConfirm}
+          handleOpenConfirm={() => setOpenConfirm(true)}
+          handleCloseConfirm={() => setOpenConfirm(false)}
+          >
+            <main>{children}</main>
+          </DashboardLayout>
             :
-            asPath.includes('dashboard') ?
-              <DashboardLayout><main>{children}</main></DashboardLayout>
-              :
-              <MainLayout><main >{children}</main></MainLayout>
+          <MainLayout
+            open={open}
+            handleOpen={() => setOpen(true)}
+            handleClose={() => setOpen(false)}
+            openConfirm={openConfirm}
+            handleOpenConfirm={() => setOpenConfirm(true)}
+            handleCloseConfirm={() => setOpenConfirm(false)}
+          >
+            <main >{children}</main>
+          </MainLayout>
       }
           </main>
 }

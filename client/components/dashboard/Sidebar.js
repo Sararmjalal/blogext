@@ -29,14 +29,20 @@ const menuItems = [
   },
 ]
 
-function Navbar({ handleDrawerToggle, mobileOpen }) {
+function Sidebar({ handleDrawerToggle, mobileOpen, handleOpenConfirm }) {
   const router = useRouter()
   const drawer = (
     <div>
       <Toolbar sx={{minHeight: {sm: "56px"}}}/>
       <List>
         {menuItems.map(({name, path}, index) => (
-          <Link key={name.trim()} passHref href={path} style={router.pathname === path ? {color: "white"} : {color: "inherit"}}>
+          <Link
+            key={name.trim()}
+            passHref
+            href={path}
+            style={router.pathname === path ? { color: "white" } : { color: "inherit" }}
+            onClick={name === 'Logout' && handleOpenConfirm}
+          >
           <ListItem>
             <ListItemButton sx={ {"&:active":{background: "#1a1a1ade"}}}>
               <ListItemText sx={{ "&:hover": { color: "secondary.main" } }} primary={name} />
@@ -83,4 +89,4 @@ function Navbar({ handleDrawerToggle, mobileOpen }) {
   );
 }
 
-export default Navbar;
+export default Sidebar;

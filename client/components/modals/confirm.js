@@ -23,15 +23,13 @@ const style = {
   p: 4,
 };
 
-const Confirm = ({ openConfirm, handleOpenConfirm, handleCloseConfirm , type, blogId }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const ConfirmModal = ({ openConfirm, handleOpenConfirm, handleCloseConfirm , type, blogId }) => {
 
   const dispatch = useDispatch()
   const router = useRouter()
 
   const logout = () => {
+    handleCloseConfirm()
     dispatch(removeCurrentUser())
     router.push('/')
   } 
@@ -49,25 +47,35 @@ const Confirm = ({ openConfirm, handleOpenConfirm, handleCloseConfirm , type, bl
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpenConfirm}>Open modal</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
+        open={openConfirm}
+        onClose={handleCloseConfirm}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
-        <Fade in={open}>
+        <Fade in={openConfirm}>
           <Box sx={style}>
-            <Typography sx={{color:'secondary.main'}} id="transition-modal-title" variant="subtitle1" component="h2">
+            <Typography
+              sx={{ color: 'secondary.main' }}
+              variant="subtitle1"
+              component="h2">
               {`Are you sure you want to ${type === 'logout' ? 'exit?' : 'delete this item?'}`}
             </Typography>
-            <Container disableGutters sx={{display:"flex", justyfyContent:"space-between", gap:'16px', mt:"30px"}}>
-              <Button onClick={handleClose} variant="cancel">Cancel</Button>
+            <Container
+              disableGutters
+              sx={{
+                display: "flex",
+                justyfyContent: "space-between",
+                gap: '16px',
+                mt: "30px"
+              }}>
+              <Button onClick={handleCloseConfirm} variant="cancel">Cancel</Button>
               <Button onClick={type === 'logout' ? logout : remove} variant="yes">Yes</Button>
             </Container>
           </Box>
@@ -76,3 +84,5 @@ const Confirm = ({ openConfirm, handleOpenConfirm, handleCloseConfirm , type, bl
     </div>
   );
 }
+
+export default ConfirmModal

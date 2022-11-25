@@ -16,7 +16,7 @@ const Footer = ({menuItems}) => {
         }}>
         <Box
           sx={{
-            padding: '33px 0'
+            padding: {md:'33px 0', xs:'20px 0 0 0'}
           }}>
           <Typography variant='logo'>
             <Link href='https://github.com/Sararmjalal/blogext'>
@@ -27,13 +27,13 @@ const Footer = ({menuItems}) => {
         </Box>
         <Box
           sx={{
-            padding: '52px 0'
+            padding: {md:'52px 0', xs: '20px 0 40px 0'}
           }}>
           <Box
             sx={{
               display: 'flex',
               gap: '32px',
-              justifyContent: 'end'
+              justifyContent: {md:'end', xs:'start'}
             }}>
             {menuItems.map(({ name, path }) => (
               <Typography

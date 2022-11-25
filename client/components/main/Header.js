@@ -5,18 +5,15 @@ import Appbar from "../dashboard/Appbar"
 import { Container } from "@mui/system"
 import { Grid, Typography,Tooltip } from "@mui/material"
 import {MenuSharp, CloseSharp, LoginSharp, LogoutSharp} from '@mui/icons-material';
-import { useState } from "react"
 
-const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose }) => {
+const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose, handleOpenConfirm }) => {
   
   const thisUser = useSelector(selectUser)
   
-  const [openConfirm, setOpenConfirm] = useState(false)
-
   return (
     <Container sx={{color: isLight ? 'primary.main' : 'secondary.main'}} maxWidth={false} disableGutters>
       {
-        thisUser && <Appbar hasMenu={false}/>
+        thisUser && <Appbar hasMenu={false} handleOpenConfirm={handleOpenConfirm} />
       }
       <Container variant='contained' maxWidth='xl'
         sx={{
@@ -28,6 +25,7 @@ const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose }) => 
         }}>
         <Grid container sx={{
           position: 'absolute',
+          zIndex: '9999',
           width: '100%',
           top: '40px',
           left: '0',
@@ -41,9 +39,13 @@ const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose }) => 
             }}>
             {
               isOpen ?
-              <CloseSharp onClick={handleClose} sx={{ fontSize: '32px', cursor: 'pointer' }} />
+                <CloseSharp
+                  onClick={handleClose}
+                  sx={{ fontSize: '32px', cursor: 'pointer' }} />
               :
-              <MenuSharp sx={{ fontSize: '32px', cursor: 'pointer' }} onClick={handleOpen}/>
+                <MenuSharp
+                  onClick={handleOpen}
+                  sx={{ fontSize: '32px', cursor: 'pointer' }} />
             }
           </Grid>
           <Grid item xs={4}
@@ -67,11 +69,12 @@ const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose }) => 
             {
             thisUser ?
              <Tooltip title='Logout'>
-                <LogoutSharp
-                  sx={{
-                    fontSize: '32px',
-                    cursor: 'pointer'
-                  }} />
+                  <LogoutSharp
+                    onClick={handleOpenConfirm}
+                    sx={{
+                      fontSize: '32px',
+                      cursor: 'pointer'
+                    }} />
               </Tooltip>
                 :
                 <Tooltip title='Login'>

@@ -3,9 +3,10 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { selectUser } from "../store/slice"
 import Loading from "../components/main/Loading"
-import Navbar from "../components/dashboard/Navbar"
+import Sidebar from "../components/dashboard/Sidebar"
 import Appbar from "../components/dashboard/Appbar"
-const DashboardLayout = ({children}) => {
+import ConfirmModal from "../components/modals/confirm"
+const DashboardLayout = ({children, openConfirm, handleOpenConfirm, handleCloseConfirm}) => {
   
   const router = useRouter()
   const thisUser = useSelector(selectUser)
@@ -22,8 +23,20 @@ const DashboardLayout = ({children}) => {
   if (!thisUser) return <Loading />
   return (
     <>
-      <Appbar handleDrawerToggle={handleDrawerToggle} />
-      <Navbar handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen} />
+      <Appbar
+        handleDrawerToggle={handleDrawerToggle}
+        handleOpenConfirm={handleOpenConfirm} />
+      <Sidebar
+        handleDrawerToggle={handleDrawerToggle}
+        mobileOpen={mobileOpen}
+        handleOpenConfirm={handleOpenConfirm}
+      />
+      <ConfirmModal
+        openConfirm={openConfirm}
+        handleOpenConfirm={handleOpenConfirm}
+        handleCloseConfirm={handleCloseConfirm}
+        type="logout"  
+      />
       <main>{children}</main>
     </>
   )
