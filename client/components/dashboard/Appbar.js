@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,18 +12,28 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../store/slice';
+import { useEffect, useMemo, useState } from 'react';
+import { checkImg } from '../../apis/statics';
 
 function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuItemsDashboard }) {
 
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const {avatar} = useSelector(selectUser)
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [brokenImg, setBrokenImg] = useState(false)
+  const { avatar } = useSelector(selectUser)
+  const { pathname } = useRouter()
+  
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const {pathname} = useRouter()
+  
+  useEffect(() => {
+    const res = checkImg(avatar)
+    setBrokenImg(res.ok)
+  }, [])
 
   return (
     <AppBar
@@ -57,7 +66,10 @@ function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuIte
         <Box sx={{display:"flex", justifyContent: "end"}}>
             <Tooltip title="Open Settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Writer profile picture" src={`${process.env.SERVER}/${avatar}`} />
+              <Avatar
+                alt="Writer profile picture"
+                src={brokenImg ?'/statics/images/user-default.svg' : `${process.env.SERVER}/${avatar}`}
+              />
               </IconButton>
             </Tooltip>
           <Menu

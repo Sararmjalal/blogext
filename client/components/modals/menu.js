@@ -26,7 +26,7 @@ export default function MenuModal({ open, handleClose, menuItems }) {
       >
         <Fade in={open}>
           <Container variant='main'
-            maxWidth={false}
+            maxWidth='xl'
             disableGutters
             height='100%'
           >

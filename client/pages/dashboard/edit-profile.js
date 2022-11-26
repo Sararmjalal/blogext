@@ -1,26 +1,33 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { selectUser } from "../../store/slice"
-import { postFormData, postJSON } from "../../apis/clients"
+import { useEffect, useMemo, useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { selectUser, setCurrentUser } from "../../store/slice"
+import { postFormData, postJSON, postMe } from "../../apis/clients"
+import { checkImg } from "../../apis/statics"
 import { toast } from "react-toastify"
 import { useTitle } from "../../lib"
 import Head from "next/head"
 import {Container, TextField, Typography, Divider, Button, Tooltip} from "@mui/material"
 import Loading from "../../components/main/Loading"
-import Image from "next/image"
 
 const EditProfile = () => {
   const thisUser = useSelector(selectUser)
+  const dispatch = useDispatch()
+  const [brokenImg, setBrokenImg] = useState(false)
   const [user, setUser] = useState(null)
   const [file, setFile] = useState(null)
 
   useEffect(() => {
+    const res = checkImg(thisUser.avatar)
+    setBrokenImg(res.ok)
+  }, [])
+  
+  useEffect(() => {
     setUser({
       name: thisUser.name,
       bio: thisUser.bio,
-      avatar: `${process.env.SERVER}/${thisUser.avatar}`
+      avatar: !brokenImg ? `${process.env.SERVER}/${thisUser.avatar}` : '/statics/images/user-default.svg'
     })
-  }, [thisUser])
+  }, [brokenImg, thisUser])
 
   useEffect(() => {
     if (file) {
@@ -38,7 +45,7 @@ const EditProfile = () => {
       const formData = new FormData()
       formData.append('avatar', file)
       const res = await postFormData(`${process.env.SERVER}/user/update-avatar`, formData)
-      if(res.msg !== 'ok') toast.error('Something went wrong during upload. Please try again!')
+      if (res.msg !== 'ok') toast.error('Something went wrong during upload. Please try again!')
     } catch (error) {
       toast.error('Server is closed lool')
     }
@@ -48,11 +55,13 @@ const EditProfile = () => {
     try {
       const res = await postJSON(`${process.env.SERVER}/user/edit`, {name: user.name, bio: user.bio})
       await submitAvatar()
-      console.log(res)
-      if(res.msg === 'ok') toast.success('Profile updated successfully!')
+      if (res.msg === 'ok') {
+        const newData = await postMe()
+        dispatch(setCurrentUser(newData))
+        toast.success('Profile updated successfully!')
+      }
     } catch (error) {
       toast.error('Server is closed lool')
-      console.log(error)
     }
   }
 
@@ -81,10 +90,12 @@ const EditProfile = () => {
                 sx={{position:'relative', height: '500px', width: { xs: '100%', md: '48%' }, margin: "0"}}
                 >
               <label htmlFor="fileInput">
-                <Image
+                <img
                   src={user.avatar}
+                  onError={(e) => e.target.src === '/statics/images/user-default.svg'}
                   alt="Writer profile picture"
-                  fill={true}
+                  width='100%'
+                  height='100%'
                   style={{objectFit:"cover", cursor:"pointer"}}
                   />
               </label>
