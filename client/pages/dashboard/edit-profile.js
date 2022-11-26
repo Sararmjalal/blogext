@@ -8,26 +8,25 @@ import { useTitle } from "../../lib"
 import Head from "next/head"
 import {Container, TextField, Typography, Divider, Button, Tooltip} from "@mui/material"
 import Loading from "../../components/main/Loading"
+import useSWRImmutable from "swr"
 
 const EditProfile = () => {
   const thisUser = useSelector(selectUser)
   const dispatch = useDispatch()
-  const [brokenImg, setBrokenImg] = useState(false)
   const [user, setUser] = useState(null)
   const [file, setFile] = useState(null)
 
-  useEffect(() => {
-    const res = checkImg(thisUser.avatar)
-    setBrokenImg(res.ok)
-  }, [])
-  
+  const { data } = useSWRImmutable(`${process.env.SERVER}/${thisUser.avatar}`, checkImg)
+
+  console.log(data)
+
   useEffect(() => {
     setUser({
       name: thisUser.name,
       bio: thisUser.bio,
-      avatar: !brokenImg ? `${process.env.SERVER}/${thisUser.avatar}` : '/statics/images/user-default.svg'
+      avatar: data ? `${process.env.SERVER}/${thisUser.avatar}` : '/statics/images/user-blog-default.svg'
     })
-  }, [brokenImg, thisUser])
+  }, [data, thisUser])
 
   useEffect(() => {
     if (file) {

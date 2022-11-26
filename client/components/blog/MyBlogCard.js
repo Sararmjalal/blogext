@@ -1,42 +1,71 @@
-
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import { Button, ListItemButton } from '@mui/material';
-import Link from 'next/link';
+import { Button, ListItem, ListItemText, ListItemAvatar, Avatar} from '@mui/material';
 import { Container } from '@mui/system';
-import ConfirmModal from '../modals/confirm';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { checkImg } from '../../apis/statics';
+import ConfirmModal from '../modals/confirm';
+import useSWRImmutable from 'swr'
 
-export default function MyBlogCard({ title, imgurl, _id }) {
+export default function MyBlogCard({ title, imgurl, _id, swrKey }) {
 
   const [openConfirm, setOpenConfirm] = useState(false)
   const router = useRouter()
+  const { data } = useSWRImmutable(`${process.env.SERVER}/${imgurl}`, checkImg)
+
   return (
-      <ListItem key={_id} alignItems="flex-start" sx={{mb: '10px'}}>
+      <ListItem alignItems="center" sx={{mb: '10px', p: '16px'}}>
         <ListItemAvatar>
-          <Avatar alt="Blog Picture" src={`${process.env.SERVER}/${imgurl}`} />
+        <Avatar
+          alt="Blog Picture"
+          src={data ?
+            `${process.env.SERVER}/${imgurl}`
+            :
+            '/statics/images/user-blog-default.svg'
+          }
+        >
+          <img
+            src='/statics/images/user-blog-default.svg'
+            style={{width:"100%", height: "100%", objectFit: "cover"}}
+          />
+        </Avatar>
         </ListItemAvatar>
         <ListItemText
         primary={title}
         primaryTypographyProps={{
-          variant: "caption"
+          variant: "caption",
+          component: 'p'
         }}
+        sx={{width:"100%"}}
+        />
+      <Container
+        disableGutters
+        maxWidth="100%"
+        sx={{
+          display: 'flex',
+          justifyContent: "end",
+          gap: "10px"
+        }}>
+        <Button
+          onClick={() => router.push(`/dashboard/edit-blog/${_id}`)}
+          variant='linkAlike'
+        >
+          Edit
+        </Button>
+        <Button
+          onClick={() => setOpenConfirm(true)}
+          variant='linkAlikeBlack'
+        >
+          Delete
+        </Button>
+      </Container>
+      <ConfirmModal
+        openConfirm={openConfirm}
+        handleOpenConfirm={() => setOpenConfirm(true)}
+        handleCloseConfirm={() => setOpenConfirm(false)}
+        type='blog'
+        blogId={_id}
+        swrKey={swrKey}
       />
-      <ListItemButton
-      
-      />
-            <Container disableGutters maxWidth="100%" sx={{display:'flex', justifyContent:"end", gap:"10px"}}>
-              <Button onClick={() => router.push(`/dashboard/edit-blog/${_id}`)} variant='linkAlike'>
-                Edit
-              </Button>
-              <Button onClick={() => setOpenConfirm(true)} variant='linkAlikeBlack'>Delete</Button>
-            </Container>
-      <ConfirmModal openConfirm={openConfirm} handleOpenConfirm={() => setOpenConfirm(true)} handleCloseConfirm={() => setOpenConfirm(false)} type='blog' blogId={_id} />
       </ListItem>
   );
 }

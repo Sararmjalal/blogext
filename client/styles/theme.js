@@ -279,7 +279,7 @@ export const blogextTheme = createTheme({
             borderRadius: '0',
             background: primary.main,
             '&:hover': {
-              background: secondary.main,
+              background: 'transparent',
               color: primary.main,
               fontWeight: '400'
             }

@@ -4,15 +4,12 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import AddEditBlog from "../../components/blog/AddEditBlog"
 
-
 const AddBlog = () => {
   const [blog, setBlog] = useState({
     title: '',
     imgurl: ''
   });
   const router = useRouter();
-
-  console.log(blog)
 
   const create = async (content) => {
     try {
@@ -26,7 +23,7 @@ const AddBlog = () => {
       router.push('/dashboard/blogs')
     }
     catch (error) {
-      toast.error('Server is closed lool')
+      return
     }
   };
 

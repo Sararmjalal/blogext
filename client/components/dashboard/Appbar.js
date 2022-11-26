@@ -12,13 +12,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../store/slice';
-import { useEffect, useMemo, useState } from 'react';
-import { checkImg } from '../../apis/statics';
+import { useState } from 'react';
 
 function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuItemsDashboard }) {
 
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [brokenImg, setBrokenImg] = useState(false)
   const { avatar } = useSelector(selectUser)
   const { pathname } = useRouter()
   
@@ -29,11 +27,6 @@ function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuIte
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  
-  useEffect(() => {
-    const res = checkImg(avatar)
-    setBrokenImg(res.ok)
-  }, [])
 
   return (
     <AppBar
@@ -68,8 +61,13 @@ function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuIte
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar
                 alt="Writer profile picture"
-                src={brokenImg ?'/statics/images/user-default.svg' : `${process.env.SERVER}/${avatar}`}
-              />
+                src={`${process.env.SERVER}/${avatar}`}
+              >
+                <img
+                  src='/statics/images/user-blog-default.svg'
+                  style={{width:"100%", height: "100%", objectFit: "cover"}}
+                />
+              </Avatar>
               </IconButton>
             </Tooltip>
           <Menu

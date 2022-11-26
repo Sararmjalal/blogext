@@ -1,7 +1,7 @@
 import { removeCurrentUser } from "../../store/slice"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/router"
-import { postJSON } from "../../apis/clients"
+import { postJSON, refetch, fetcher } from "../../apis/clients"
 import { toast } from "react-toastify"
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
@@ -23,7 +23,7 @@ const style = {
   border:'none'
 };
 
-const ConfirmModal = ({ openConfirm, handleOpenConfirm, handleCloseConfirm , type, blogId }) => {
+const ConfirmModal = ({ openConfirm, handleCloseConfirm , type, blogId, swrKey }) => {
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -39,10 +39,11 @@ const ConfirmModal = ({ openConfirm, handleOpenConfirm, handleCloseConfirm , typ
     try {
       const res = await postJSON(`${process.env.SERVER}/blog/delete`, { blogId })
       if (res.msg !== 'ok') return toast.error("Something went wrong. Please try again!")
+      await refetch(swrKey, fetcher)
       toast.info('Selected blog deleted successfully')
     }
     catch (error) {
-      toast.error('Server is closed lool')
+      return
     }
   }
 

@@ -1,16 +1,31 @@
 import { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import { useTitle } from "../../lib"
-import Head from "next/head"
+import { useTitle, useToken } from "../../lib"
 import { Container } from "@mui/system"
 import { Button, Divider, TextField, Typography } from "@mui/material"
+import { fetcher, refetch } from '../../apis/clients';
+import Head from 'next/head';
 
 const AddEditBlog = ({type, title, blog, setBlog, create, edit}) => {
 
   const editorRef = useRef(null);
 
+  const submit = async () => {
+    const swrKey = [
+      `${process.env.SERVER}/blog/my-blogs`,
+      {
+        'Content-Type': 'application/json',
+        'auth': useToken()
+      }
+    ]
+    type === 'create' ? await create(editorRef.current.getContent()) : await edit(editorRef.current.getContent())
+    await refetch(swrKey, fetcher)
+  }
+
   return (
-  <section>
+    <section
+    onKeyDown={(e) => e.key === 'Enter' ? submit() : ""}
+    >
   <Head>
    <title>{useTitle(title)}</title>
   </Head>
@@ -86,7 +101,7 @@ const AddEditBlog = ({type, title, blog, setBlog, create, edit}) => {
               }}
               />
         </Container>
-        <Button variant="primaryButton" onClick={() => type === 'create' ? create(editorRef.current.getContent()) : edit(editorRef.current.getContent())}>Publish</Button>
+          <Button variant="primaryButton" onClick={submit}>Publish</Button>
       </Container>
   </Container>
 </section>

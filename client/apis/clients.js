@@ -1,10 +1,10 @@
 import { useToken } from "../lib"
 import { mutate } from "swr"
 
-export const fetcher = async (url, headers = {'Content-Type': 'application/json'}) => {
-  const res = await (await fetch(url, {headers})).json()
-  if (res.msg) throw new Error(res.msg)
-  return res
+export const fetcher = async (url, headers = { 'Content-Type': 'application/json' }) => {
+  const res = await (await fetch(url, { headers })).json()
+    if (res.msg && res.msg !== 'ok') throw new Error(res.msg)
+    return res
 }
 
 export const refetch = async (key, func) => {

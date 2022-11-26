@@ -2,10 +2,7 @@ import { useRouter } from "next/router"
 import { fetcher, postJSON } from "../../../apis/clients"
 import useSWR from "swr"
 import { useEffect, useState } from "react"
-import { Button } from "@mui/material"
 import { toast } from "react-toastify"
-import { useTitle } from "../../../lib"
-import Head from "next/head"
 import Loading from "../../../components/main/Loading"
 import AddEditBlog from "../../../components/blog/AddEditBlog"
 
@@ -29,12 +26,16 @@ const EditBlog = () => {
     if (error) return router.push('/404')
   }, [error])
 
-  const edit = async () => {
+  const edit = async (content) => {
     try {
       const res = await postJSON(`${process.env.SERVER}/blog/edit`,
       {
         blogId: router.query._id,
-        data: thisBlog
+        data: {
+          title: thisBlog.title,
+          content,
+          imgurl: thisBlog.imgurl
+        }
       }
     )
     if (res.msg !== 'ok') return toast.error('Pay attention please!')

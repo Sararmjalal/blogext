@@ -12,6 +12,6 @@ const getBlogComments = async (_id) => await (await fetch(`${process.env.SERVER}
 
 const getTopBlogs = async () => await (await fetch(`${process.env.SERVER}/blog/top-blogs`)).json()
 
-const checkImg = async (endpoint) => await fetch(`${process.env.SERVER}/${endpoint}`)
+const checkImg = async (url) => (await fetch(url)).ok
 
 export { getAllWriters, getSingleWriter, getTopWriters, getAllBlogs, getSingleBlog, getBlogComments, getTopBlogs, checkImg }
