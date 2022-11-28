@@ -16,17 +16,13 @@ const EditProfile = () => {
   const [user, setUser] = useState(null)
   const [file, setFile] = useState(null)
 
-  const { data } = useSWRImmutable(`${process.env.SERVER}/${thisUser.avatar}`, checkImg)
-
-  console.log(data)
-
   useEffect(() => {
     setUser({
       name: thisUser.name,
       bio: thisUser.bio,
-      avatar: data ? `${process.env.SERVER}/${thisUser.avatar}` : '/statics/images/user-blog-default.svg'
+      avatar: thisUser.avatar? `${process.env.SERVER}/${thisUser.avatar}` : '/statics/images/user-blog-default.svg'
     })
-  }, [data, thisUser])
+  }, [thisUser])
 
   useEffect(() => {
     if (file) {
@@ -51,6 +47,7 @@ const EditProfile = () => {
   }
 
   const editProfile = async () => {
+    if(!user.bio || !user.name) return toast.error("You can't submit empty fields lool")
     try {
       const res = await postJSON(`${process.env.SERVER}/user/edit`, {name: user.name, bio: user.bio})
       await submitAvatar()

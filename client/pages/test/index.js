@@ -1,72 +1,52 @@
 import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import Loading from '../../components/main/Loading';
+import LoginRegister from '../../components/signin/LoginRegister';
 
-export default function AlignItemsList() {
+export default function LabTabs() {
+  const [value, setValue] = React.useState('1');
+  const [userLogin, setUserLogin] = React.useState({
+    password: "",
+    username:""
+  })
+
+  const [userRegister, setUserRegister] = React.useState({
+    name: "",
+    username:""
+  })
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Brunch this weekend?"
-          secondary={
-            <React.Fragment>
-              {"I'll be in your neighborhood doing errands this…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Summer BBQ"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              {" — Wish I could come, but I'm out of town this…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Oui Oui"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                Sandra Adams
-              </Typography>
-              {' — Do you have Paris recommendations? Have you ever…'}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-    </List>
+    <Box sx={{ maxWidth: 'sm', margin:"auto" }}>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: '#dce4e7' }}>
+          <TabList onChange={handleChange} textColor="primary.main" centered TabIndicatorProps={{style:{height:"2px"}}}>
+            <Tab label="Login" value="1" active sx={{width:"50%"}} />
+            <Tab label="Register" value="2"  sx={{width:"50%"}}/>
+          </TabList>
+        </Box>
+        <TabPanel value="1">
+          <LoginRegister
+            type="login"
+            user={userLogin}
+            setUser={setUserLogin}
+          />
+        </TabPanel>
+        <TabPanel value="2">
+          <LoginRegister
+            type="register"
+            user={userRegister}
+            setUser={setUserRegister}
+          />
+        </TabPanel>
+      </TabContext>
+    </Box>
   );
 }

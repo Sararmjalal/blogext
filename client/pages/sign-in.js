@@ -1,76 +1,68 @@
-import { postJSON, postMe } from "../apis/clients"
-import { useRouter } from "next/router"
-import { setToken, useTitle } from "../lib"
-import { Button } from "@mui/material"
-import { useDispatch, useSelector } from "react-redux"
-import { setCurrentUser, selectUser } from "../store/slice"
-import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { useTitle } from "../lib"
+import { useSelector } from "react-redux"
+import { selectUser } from "../store/slice"
+import { Box, Tab } from '@mui/material'
+import { TabContext, TabList, TabPanel } from "@mui/lab"
 import Head from "next/head"
 import Loading from "../components/main/Loading"
+import LoginRegister from "../components/signin/LoginRegister"
+import { Container } from "@mui/system"
 
 const SignIn = () => {
   const router = useRouter()
-  const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
+  const [userLogin, setUserLogin] = useState({
+    password: "",
+    username:""
+  })
+  const [userRegister, setUserRegister] = useState({
+    name: "",
+    username:""
+  })
   const thisUser = useSelector(selectUser)
+
+  const [value, setValue] = useState('1');
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   useEffect(() => {
     thisUser ? router.push('/dashboard/blogs') : setLoading(false)
   }, [])
 
-  const signup = async (body) => {
-    try {
-      const res = await postJSON(`${process.env.SERVER}/user/signup`, body, false)
-      if (res.msg) return toast.warn('Already one of us lool')
-      setToken(res.token)
-      const user = await postMe()
-      dispatch(setCurrentUser(user))
-      router.push('/dashboard/blogs')
-      toast.success("You've logged in successfully!")
-    }
-    catch (error) {
-      toast.error('Server is closed lool')
-    }
-  }
-
-  const login = async (body) => {
-    
-    const body2 = {
-      username: 'sara',
-      password: '1111'
-    }
- 
-    try {
-      const res = await postJSON(`${process.env.SERVER}/user/login`, body2, false)
-      if (res.msg === 'bad request: no such user exists')
-        return toast.error('Not of on us lool')
-      if (res.msg === 'password doesnt match')
-        return toast.error("Wrong password")
-      setToken(res.token)
-      const user = await postMe()
-      if(!user) return
-      dispatch(setCurrentUser(user))
-      router.push('/dashboard/blogs')
-      toast.success("You've logged in successfully!")
-    }
-    catch (error) {
-      toast.error('Server is closed lool')
-    }
-  }
-
   if(loading) return <Loading />
   return (
-    <section>
+    <Container maxWidth='xl' disableGutters>
       <Head>
-        <title>{useTitle('Create an Account')}</title>
-        <meta name="description" content="Login/Register page" />
+      <title>{useTitle('Sign in')}</title>
       </Head>
-        <div>
-          <h1>Login Sign up yeay!</h1>
-          <Button onClick={login}>Click me</Button>
-        </div>
-    </section>
+    <Box sx={{ maxWidth: 'sm', margin: "auto" }}>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: '#dce4e7' }}>
+          <TabList onChange={handleChange} textColor="primary" centered TabIndicatorProps={{style:{height:"2px"}}}>
+            <Tab label="Login" value="1" sx={{width:"50%"}} />
+            <Tab label="Register" value="2"  sx={{width:"50%"}}/>
+          </TabList>
+        </Box>
+        <TabPanel value="1">
+          <LoginRegister
+            type="login"
+            user={userLogin}
+            setUser={setUserLogin}
+            />
+        </TabPanel>
+        <TabPanel value="2">
+          <LoginRegister
+            type="register"
+            user={userRegister}
+            setUser={setUserRegister}
+            />
+        </TabPanel>
+      </TabContext>
+    </Box>
+            </Container>
     )
 }
 
