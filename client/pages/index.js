@@ -3,11 +3,10 @@ import Button from '@mui/material/Button'
 import { useTitle } from '../lib'
 import { getTopWriters, getTopBlogs, getAllWriters } from '../apis/statics'
 import { Typography } from '@mui/material'
-import TopRatedCard from '../components/blog/TopRatedCard'
-import Image from 'next/image'
+import TopRatedBlogCard from '../components/blog/TopRatedCard'
+import TopRatedUserCard from '../components/writer/TopRatedCard'
 import { Container } from '@mui/system'
 import TopImage from '../components/main/TopImage'
-import { useEffect } from 'react'
 
 export async function getStaticProps() {
   const writers = await getTopWriters()
@@ -37,23 +36,6 @@ export async function getStaticProps() {
 }
 
 export default function Home({ writers, blogs, creators }) {
-  const abc = async () => {
-  const allWriters = await getAllWriters()
-  console.log(allWriters)
-  const creatorIds = blogs.map(blog => (blog.creatorId))
-  console.log(creatorIds)
-    const creators = []
-  allWriters.forEach(writer => {
-  creatorIds.forEach(_id => {
-    if (_id === writer._id) creators.push( {
-      name: writer.name,
-      _id,
-    })
-  })
-  })
-}  
-console.log(creators)
-
   return (
     <Container maxWidth='100%' disableGutters>
       <Head>
@@ -70,15 +52,29 @@ console.log(creators)
               <Typography variant="caption">No blogs found, sorry!</Typography>
               :
               blogs.map(blog => (
-                <TopRatedCard
+                <TopRatedBlogCard
                   key={blog._id}
                   blog={blog}
                   creator={creators.find(creator => creator._id === blog.creatorId)}
                 />
               ))
           }
-
         </Container>
+        <Typography component='h3' variant='h3' sx={{ mt: "69px", mb: "35px" }}>Top rated writers</Typography>
+          <Container maxWidth='100%' disableGutters sx={{ display: "flex", flexDirection: "column", gap: "30px", justifyContent: "start" }}>
+            {
+              !writers[0] ?
+                <Typography variant="caption">No writers found, sorry!</Typography>
+                :
+                writers.map((writer, index) => (
+                  <TopRatedUserCard
+                    key={writer._id}
+                    writer={writer}
+                    place={index + 1}
+                  />
+                ))
+            }
+          </Container>
       </Container>
     </Container>
   )

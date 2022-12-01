@@ -153,7 +153,15 @@ export const blogextTheme = createTheme({
           margin: { xs: "0 24px", md: "0 8%" },
           maxWidth:"100%"
         }
-        }]
+        },
+        {
+          props: { variant: 'imageLess' },
+          style: {
+            maxWidth: "100%",
+            marginTop:'130px'
+          }
+        }
+      ]
     },
     MuiTypography: {
       variants: [{

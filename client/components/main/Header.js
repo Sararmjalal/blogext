@@ -5,10 +5,18 @@ import Appbar from "../dashboard/Appbar"
 import { Container } from "@mui/system"
 import { Grid, Typography,Tooltip } from "@mui/material"
 import {MenuSharp, CloseSharp, LoginSharp, LogoutSharp} from '@mui/icons-material';
+import { useRouter } from "next/router"
 
 const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose, handleOpenConfirm, menuItemsDashboard }) => {
   
   const thisUser = useSelector(selectUser)
+
+  const {pathname} = useRouter()
+
+  const withImagePaths = {
+    home: "/",
+    others: ['/blog/']
+  }
   
   return (
     <Container
@@ -16,7 +24,7 @@ const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose, handl
         color: isLight ?
           'primary.main'
           :
-          'secondary.main'
+          'secondary.main',
       }}
       maxWidth={false}
       disableGutters
@@ -32,7 +40,8 @@ const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose, handl
         sx={{
           position: 'relative',
           width: {xs:'100vw', md:'calc(100vw - 48px)'},
-          m:"auto"
+          m: "auto",
+          height: withImagePaths.others.some(path => pathname.includes(path) || pathname === withImagePaths.home) ? '0px' : '130px'
         }}>
         <Grid container sx={{
           position: 'absolute',

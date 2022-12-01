@@ -1,36 +1,26 @@
 import { Container, Box } from "@mui/system"
-import { Button, Typography, Rating } from "@mui/material"
-import { useRouter } from "next/router"
-import { useEffect, useRef } from "react"
-import { checkImg } from "../../apis/statics"
-import useSWRImmutable from "swr"
 import Image from "next/image"
+import useSWRImmutable from "swr"
+import { Button, Typography, Rating } from "@mui/material"
 import Link from "next/link"
+import { useRouter } from "next/router"
+import { checkImg } from "../../apis/statics"
 
-const TopRatedCard = ({ blog, creator }) => {
+const TopRatedCard = ({ writer, place }) => {
 
-  const { _id, averageScore, imgurl, rateCount, title, updatedAt, content } = blog
+  const { _id, averageScore, avatar, createdAt, bio, name  } = writer
   
-  const { data } = useSWRImmutable(`${process.env.SERVER}/${imgurl}`, checkImg)
-
-  const contentRef = useRef(null)
+  const { data } = useSWRImmutable(`${process.env.SERVER}/${avatar}`, checkImg)
 
   const router = useRouter()
 
-  useEffect(() => {
-    if (contentRef.current) {
-      const currentText = contentRef.current.innerText
-      contentRef.current.innerHTML = currentText.length > 188 ? currentText.slice(0, 188) + '...' : currentText
-    }
-  }, [contentRef.current])
-
   const calculatedDays = () => {
-    const difference = (new Date() - new Date(updatedAt)) / (1000 * 3600 * 24)
-    if (difference < 1) return 'Today'
-    if (difference > 1 && difference < 2) return '1 day ago'
-    return Math.ceil(difference) + 'days ago'
+    const difference = (new Date() - new Date(createdAt)) / (1000 * 3600 * 24)
+    if (difference < 1) return 'Joined in Today'
+    if (difference > 1 && difference < 2) return 'Joined 1 day ago'
+    return 'Joined' + Math.ceil(difference) + 'days ago'
   }
-  
+
   return (
     <Container
       maxWidth={false}
@@ -48,8 +38,8 @@ const TopRatedCard = ({ blog, creator }) => {
           height: "460px"
         }}>
         <Image
-          src={data && imgurl ? `${process.env.SERVER}/${imgurl}` : '/statics/images/user-blog-default.svg'}
-          alt="Blog Image"
+          src={data && avatar ? `${process.env.SERVER}/${avatar}` : '/statics/images/user-blog-default.svg'}
+          alt="User Image"
           fill
           style={{objectFit:"cover"}}
         />
@@ -72,8 +62,8 @@ const TopRatedCard = ({ blog, creator }) => {
             width: '100%'
           }}>
             <Typography variant="p">
-              <Link href={`/writer/${creator._id}`}>
-              {`#${creator.name}`}
+              <Link href={`/writer/${_id}`}>
+              {`#${name}`}
               </Link>
             </Typography>
           <Typography
@@ -93,25 +83,15 @@ const TopRatedCard = ({ blog, creator }) => {
         <Typography
           component='h2'
           variant='h2'>
-          {title.length > 45 ? title.slice(0, 45) + '...' : title}
+          {`Rank ${place} in Blogext`}
         </Typography>
-        <Typography ref={contentRef} component='p' variant='subtitle2' dangerouslySetInnerHTML={{__html: content}} />
-        <Box component="div"
-          sx={{
-            display: "flex",
-            gap: "6px",
-            width: '100%',
-            m: "16px 0"
-          }}>
-        <Rating readOnly value={averageScore} />
-          <Typography
-            component='span'
-            variant='caption'
-            sx={{ lineHeight: "23px" }}>
-            {`by ${rateCount} people`}
-          </Typography>
-          </Box>
-        <Button variant='primaryButton' onClick={() => router.push(`/blog/${_id}`)}>Read more</Button>
+        <Typography component='p' variant='subtitle2'>{bio ? bio : 'No info yet'}</Typography>
+          <Rating readOnly value={averageScore}
+            sx={{
+              width: '100%',
+              m: "16px 0"
+            }}/>
+        <Button variant='primaryButton' onClick={() => router.push(`/writer/${_id}`)}>See more</Button>
       </Container>
     </Container>
   )
