@@ -45,6 +45,7 @@ a {
 /* Customize MUI classes */
 ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
 background-color: black;
+z-index: '9999';
 }
 
 .tox.tox-tinymce {

@@ -48,7 +48,7 @@ const MainLayout = ({ children, open, handleOpen, handleClose, openConfirm, hand
         type="logout" />
       <Container
         variant="main"
-        maxWidth='xl'
+        maxWidth='100%'
         disableGutters>{children}
       </Container>
        <Footer menuItems={menuItems}/>

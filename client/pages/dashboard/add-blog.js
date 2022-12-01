@@ -1,8 +1,10 @@
-import { postJSON } from "../../apis/clients"
+import { postJSON, postMe } from "../../apis/clients"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import AddEditBlog from "../../components/blog/AddEditBlog"
+import { useDispatch } from "react-redux"
+import { setCurrentUser } from "../../store/slice"
 
 const AddBlog = () => {
   const [blog, setBlog] = useState({
@@ -10,6 +12,7 @@ const AddBlog = () => {
     imgurl: ''
   });
   const router = useRouter();
+  const dispatch = useDispatch()
 
   const create = async (content) => {
     try {
@@ -20,6 +23,8 @@ const AddBlog = () => {
       })
       if (res.msg === 'bad request: bad inputs') return toast.error('Pay attention please!')
       toast.success('You added a blog lool')
+      const thisUser = await postMe()
+      dispatch(setCurrentUser(thisUser))
       router.push('/dashboard/blogs')
     }
     catch (error) {

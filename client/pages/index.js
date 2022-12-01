@@ -1,32 +1,85 @@
 import Head from 'next/head'
 import Button from '@mui/material/Button'
 import { useTitle } from '../lib'
-import { getTopWriters, getTopBlogs } from '../apis/statics'
+import { getTopWriters, getTopBlogs, getAllWriters } from '../apis/statics'
 import { Typography } from '@mui/material'
+import TopRatedCard from '../components/blog/TopRatedCard'
+import Image from 'next/image'
+import { Container } from '@mui/system'
+import TopImage from '../components/main/TopImage'
+import { useEffect } from 'react'
 
 export async function getStaticProps() {
-    const writers = await getTopWriters()
-    const blogs = await getTopBlogs()
+  const writers = await getTopWriters()
+  const blogs = await getTopBlogs()
+  
+  const allWriters = await getAllWriters()
+  const creatorIds = blogs.map(blog => (blog.creatorId))
+  const creators = []
+
+  allWriters.forEach(writer => {
+  creatorIds.forEach(_id => {
+    if (_id === writer._id) creators.push( {
+      name: writer.name,
+      _id,
+    })
+  })
+  })
+
     return {
       props: {
         writers,
-        blogs
+        blogs,
+        creators,
       },
       revalidate: 60 * 60 * 24 
   }
 }
 
-export default function Home({writers, blogs}) {
+export default function Home({ writers, blogs, creators }) {
+  const abc = async () => {
+  const allWriters = await getAllWriters()
+  console.log(allWriters)
+  const creatorIds = blogs.map(blog => (blog.creatorId))
+  console.log(creatorIds)
+    const creators = []
+  allWriters.forEach(writer => {
+  creatorIds.forEach(_id => {
+    if (_id === writer._id) creators.push( {
+      name: writer.name,
+      _id,
+    })
+  })
+  })
+}  
+console.log(creators)
+
   return (
-    <div>
+    <Container maxWidth='100%' disableGutters>
       <Head>
         <title>{useTitle('Home')}</title>
         <meta name="description" content="Simple Blog App with Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Typography component='h2' variant='h2'> WWWggg</Typography>
-      <h1>Welcome Home!</h1>
-      <Button variant="secondaryButton">Hello World</Button>
-    </div>
+      <TopImage src='/statics/images/home-page.jpg' alt="Home page main picture" />
+      <Container maxWidth='xl'>
+        <Typography component='h3' variant='h3' sx={{ mt: "69px", mb: "35px" }}>Top rated blogs</Typography>
+        <Container maxWidth='100%' disableGutters sx={{ display: "flex", flexDirection: "column", gap: "30px", justifyContent: "start" }}>
+          {
+            !blogs[0] ?
+              <Typography variant="caption">No blogs found, sorry!</Typography>
+              :
+              blogs.map(blog => (
+                <TopRatedCard
+                  key={blog._id}
+                  blog={blog}
+                  creator={creators.find(creator => creator._id === blog.creatorId)}
+                />
+              ))
+          }
+
+        </Container>
+      </Container>
+    </Container>
   )
 }

@@ -11,7 +11,16 @@ const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose, handl
   const thisUser = useSelector(selectUser)
   
   return (
-    <Container sx={{color: isLight ? 'primary.main' : 'secondary.main'}} maxWidth={false} disableGutters>
+    <Container
+      sx={{
+        color: isLight ?
+          'primary.main'
+          :
+          'secondary.main'
+      }}
+      maxWidth={false}
+      disableGutters
+    >
       {
         thisUser &&
         <Appbar
@@ -19,17 +28,16 @@ const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose, handl
           handleOpenConfirm={handleOpenConfirm}
           menuItemsDashboard={menuItemsDashboard} />
       }
-      <Container variant='contained' maxWidth='xl'
+      <Container variant='contained' maxWidth='100%'
         sx={{
           position: 'relative',
-          height: '130px',
-          padding: '40px 0 80px 0',
-          width: '100vw',
-          ml: {xs:'0', md:'auto'}
+          width: {xs:'100vw', md:'calc(100vw - 48px)'},
+          m:"auto"
         }}>
         <Grid container sx={{
           position: 'absolute',
-          zIndex: '9999',
+          padding: '40px 24px 80px 24px',
+          zIndex: '9998',
           width: '100%',
           top: '40px',
           left: '0',

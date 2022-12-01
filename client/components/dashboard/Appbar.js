@@ -72,7 +72,7 @@ function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuIte
             </Tooltip>
           <Menu
               elevation={0} 
-              sx={{ mt: '47px' }}
+              sx={{ mt: '47px', zIndex:9999 }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{

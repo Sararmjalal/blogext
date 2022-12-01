@@ -15,7 +15,7 @@ const StateProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false)
-  const { pathname, asPath } = useRouter()
+  const { pathname, asPath, push } = useRouter()
   
   const menuItemsDashboard = [
     {
@@ -47,6 +47,7 @@ const StateProvider = ({ children }) => {
 
   const ifVerified = async () => {
     const user = await postMe()
+    if (user.msg) return setLoading(false)
     dispatch(setCurrentUser(user))
     setLoading(false)
   }

@@ -209,8 +209,12 @@ class UserSchema {
     const thisUser = deepClone(await this.findById(_id))
   
     const index = thisUser.blogs.findIndex(blog => blog === blogId)
+
+    console.log("THIS USER BLOGS BEFORE", thisUser.blogs.length)
     
     thisUser.blogs.splice(index, 1)
+
+    console.log("THIS USER BLOGS AFTER", thisUser.blogs.length)
   
     writeFileSync(path.join(userDirectory, `${thisUser._id}/info.txt`), JSON.stringify(thisUser), "utf8")
   

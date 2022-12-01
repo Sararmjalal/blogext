@@ -29,7 +29,7 @@ const openSans = localFont({
 
 const color = {
   background: {
-    default: '#F2F2F2'
+    default: 'white'
   },
   primary: {
     main: '#000000'
@@ -84,7 +84,7 @@ export const blogextTheme = createTheme({
       fontFamily: cormorantGaramond.style.fontFamily,
       fontWeight: "400",
       fontSize: '52px',
-      lineHeight: '80px',
+      lineHeight: '64px',
       fontStyle: "normal",
       color: primary.main,
     },
@@ -92,7 +92,7 @@ export const blogextTheme = createTheme({
       fontFamily: cormorantGaramond.style.fontFamily,
       fontWeight: "400",
       fontSize: '36px',
-      lineHeight: '80px',
+      lineHeight: '46px',
       fontStyle: "normal",
       color: primary.main,
     },
@@ -100,7 +100,7 @@ export const blogextTheme = createTheme({
       fontFamily: cormorantGaramond.style.fontFamily,
       fontWeight: "400",
       fontSize: '24px',
-      lineHeight: '80px',
+      lineHeight: '32px',
       fontStyle: "normal",
       color: primary.main,
     },
@@ -151,6 +151,7 @@ export const blogextTheme = createTheme({
         props: { variant: 'contained' },
         style: {
           margin: { xs: "0 24px", md: "0 8%" },
+          maxWidth:"100%"
         }
         }]
     },

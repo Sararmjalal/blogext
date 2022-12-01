@@ -1,7 +1,7 @@
-import { removeCurrentUser } from "../../store/slice"
+import { setCurrentUser, removeCurrentUser } from "../../store/slice"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/router"
-import { postJSON, refetch, fetcher } from "../../apis/clients"
+import { postJSON, postMe, refetch, fetcher } from "../../apis/clients"
 import { toast } from "react-toastify"
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
@@ -41,6 +41,8 @@ const ConfirmModal = ({ openConfirm, handleCloseConfirm , type, blogId, swrKey }
       if (res.msg !== 'ok') return toast.error("Something went wrong. Please try again!")
       await refetch(swrKey, fetcher)
       toast.info('Selected blog deleted successfully')
+      const thisUser = await postMe()
+      dispatch(setCurrentUser(thisUser))
     }
     catch (error) {
       return

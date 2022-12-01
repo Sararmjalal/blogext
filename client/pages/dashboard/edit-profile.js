@@ -16,6 +16,8 @@ const EditProfile = () => {
   const [user, setUser] = useState(null)
   const [file, setFile] = useState(null)
 
+  console.log("THIS USER", thisUser)
+
   useEffect(() => {
     setUser({
       name: thisUser.name,
