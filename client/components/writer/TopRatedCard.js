@@ -3,7 +3,6 @@ import Image from "next/image"
 import useSWRImmutable from "swr"
 import { Button, Typography, Rating } from "@mui/material"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { checkImg } from "../../apis/statics"
 
 const TopRatedCard = ({ writer, place }) => {
@@ -11,8 +10,6 @@ const TopRatedCard = ({ writer, place }) => {
   const { _id, averageScore, avatar, createdAt, bio, name  } = writer
   
   const { data } = useSWRImmutable(`${process.env.SERVER}/${avatar}`, checkImg)
-
-  const router = useRouter()
 
   const calculatedDays = () => {
     const difference = (new Date() - new Date(createdAt)) / (1000 * 3600 * 24)
@@ -91,7 +88,14 @@ const TopRatedCard = ({ writer, place }) => {
               width: '100%',
               m: "16px 0"
             }}/>
-        <Button variant='primaryButton' onClick={() => router.push(`/writer/${_id}`)}>See more</Button>
+        <Button variant='primaryButton'>
+          <Link href={{
+            pathname: '/writer/[_id]',
+            query: {_id,}
+          }}>
+          See more
+          </Link>
+        </Button>
       </Container>
     </Container>
   )

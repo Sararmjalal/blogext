@@ -1,6 +1,5 @@
 import { Container, Box } from "@mui/system"
 import { Button, Typography, Rating } from "@mui/material"
-import { useRouter } from "next/router"
 import { useEffect, useRef } from "react"
 import { checkImg } from "../../apis/statics"
 import useSWRImmutable from "swr"
@@ -13,9 +12,7 @@ const TopRatedCard = ({ blog, creator }) => {
   
   const { data } = useSWRImmutable(`${process.env.SERVER}/${imgurl}`, checkImg)
 
-  const contentRef = useRef(null)
-
-  const router = useRouter()
+  const contentRef = useRef(null) 
 
   useEffect(() => {
     if (contentRef.current) {
@@ -111,7 +108,14 @@ const TopRatedCard = ({ blog, creator }) => {
             {`by ${rateCount} people`}
           </Typography>
           </Box>
-        <Button variant='primaryButton' onClick={() => router.push(`/blog/${_id}`)}>Read more</Button>
+        <Button variant='primaryButton'>
+          <Link href={{
+            pathname: '/blog/[_id]',
+            query: {_id,}
+          }}>
+          Read more
+          </Link>
+        </Button>
       </Container>
     </Container>
   )

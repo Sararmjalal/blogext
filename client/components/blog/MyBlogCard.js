@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { checkImg } from '../../apis/statics';
 import ConfirmModal from '../modals/confirm';
 import useSWRImmutable from 'swr'
+import Link from 'next/link'
 
 export default function MyBlogCard({ title, imgurl, _id, swrKey }) {
 
@@ -45,10 +46,12 @@ export default function MyBlogCard({ title, imgurl, _id, swrKey }) {
           justifyContent: "end",
           gap: "10px"
         }}>
-        <Button
-          onClick={() => router.push(`/dashboard/edit-blog/${_id}`)}
-          variant='linkAlike'
-        >
+        <Button variant='linkAlike'>
+          <Link href={{
+            pathname: '/dashboard/edit-blog/[_id]',
+            query: {_id,}
+          }}>
+          </Link>
           Edit
         </Button>
         <Button
