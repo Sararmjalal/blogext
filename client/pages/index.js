@@ -7,6 +7,7 @@ import TopRatedBlogCard from '../components/blog/TopRatedCard'
 import TopRatedUserCard from '../components/writer/TopRatedCard'
 import { Container } from '@mui/system'
 import TopImage from '../components/main/TopImage'
+import About from '../components/main/About'
 
 export async function getStaticProps() {
   const writers = await getTopWriters()
@@ -44,7 +45,8 @@ export default function Home({ writers, blogs, creators }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TopImage src='/statics/images/home-page.jpg' alt="Home page main picture" />
-      <Container maxWidth='xl'>
+      <Container maxWidth='xl' sx={{ position: 'relative', padding: {xl:"0"} }}>
+        <About />
         <Typography component='h3' variant='h3' sx={{ mt: "69px", mb: "35px" }}>Top rated blogs</Typography>
         <Container maxWidth='100%' disableGutters sx={{ display: "flex", flexDirection: "column", gap: "30px", justifyContent: "start" }}>
           {
