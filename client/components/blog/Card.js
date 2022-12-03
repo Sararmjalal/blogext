@@ -6,7 +6,7 @@ import useSWRImmutable from "swr"
 import Image from "next/image"
 import Link from "next/link"
 
-const TopRatedCard = ({ blog, creator }) => {
+const BlogCard = ({ blog, creator }) => {
 
   const { _id, averageScore, imgurl, rateCount, title, updatedAt, content } = blog
   
@@ -121,4 +121,4 @@ const TopRatedCard = ({ blog, creator }) => {
   )
 }
 
-export default TopRatedCard
+export default BlogCard

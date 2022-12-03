@@ -5,7 +5,7 @@ import { Button, Typography, Rating } from "@mui/material"
 import Link from "next/link"
 import { checkImg } from "../../apis/statics"
 
-const TopRatedCard = ({ writer, place }) => {
+const WriterCard = ({ writer, place }) => {
 
   const { _id, averageScore, avatar, createdAt, bio, name  } = writer
   
@@ -101,4 +101,4 @@ const TopRatedCard = ({ writer, place }) => {
   )
 }
 
-export default TopRatedCard
+export default WriterCard

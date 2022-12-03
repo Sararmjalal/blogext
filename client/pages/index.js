@@ -1,13 +1,12 @@
 import Head from 'next/head'
-import Button from '@mui/material/Button'
 import { useTitle } from '../lib'
 import { getTopWriters, getTopBlogs, getAllWriters } from '../apis/statics'
 import { Typography } from '@mui/material'
-import TopRatedBlogCard from '../components/blog/TopRatedCard'
-import TopRatedUserCard from '../components/writer/TopRatedCard'
 import { Container } from '@mui/system'
 import TopImage from '../components/main/TopImage'
 import About from '../components/main/About'
+import BlogSection from '../components/blog/BlogSection'
+import WriterSection from '../components/writer/WriterSection'
 
 export async function getStaticProps() {
   const writers = await getTopWriters()
@@ -48,35 +47,9 @@ export default function Home({ writers, blogs, creators }) {
       <Container maxWidth='xl' sx={{ position: 'relative', padding: {xl:"0"} }}>
         <About />
         <Typography component='h3' variant='h3' sx={{ mt: "69px", mb: "35px" }}>Top rated blogs</Typography>
-        <Container maxWidth='100%' disableGutters sx={{ display: "flex", flexDirection: "column", gap: "30px", justifyContent: "start" }}>
-          {
-            !blogs[0] ?
-              <Typography variant="caption">No blogs found, sorry!</Typography>
-              :
-              blogs.map(blog => (
-                <TopRatedBlogCard
-                  key={blog._id}
-                  blog={blog}
-                  creator={creators.find(creator => creator._id === blog.creatorId)}
-                />
-              ))
-          }
-        </Container>
+          <BlogSection blogs={blogs} creators={creators} />
         <Typography component='h3' variant='h3' sx={{ mt: "69px", mb: "35px" }}>Top rated writers</Typography>
-          <Container maxWidth='100%' disableGutters sx={{ display: "flex", flexDirection: "column", gap: "30px", justifyContent: "start" }}>
-            {
-              !writers[0] ?
-                <Typography variant="caption">No writers found, sorry!</Typography>
-                :
-                writers.map((writer, index) => (
-                  <TopRatedUserCard
-                    key={writer._id}
-                    writer={writer}
-                    place={index + 1}
-                  />
-                ))
-            }
-          </Container>
+          <WriterSection writers={writers} />
       </Container>
     </Container>
   )
