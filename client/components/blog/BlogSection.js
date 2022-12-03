@@ -7,13 +7,13 @@ const BlogSection = ({ blogs, creators }) => {
     <Container maxWidth='100%' disableGutters sx={{ display: "flex", flexDirection: "column", gap: "30px", justifyContent: "start" }}>
     {
       !blogs[0] ?
-        <Typography variant="caption">No blogs found, sorry!</Typography>
+        <Typography variant="caption" sx={{mb:"70px"}}>No blogs found, sorry!</Typography>
         :
         blogs.map(blog => (
           <BlogCard
             key={blog._id}
             blog={blog}
-            creator={creators.find(creator => creator._id === blog.creatorId)}
+            creator={Array.isArray(creators) ? creators.find(creator => creator._id === blog.creatorId) : creators}
           />
         ))
     }

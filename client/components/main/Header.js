@@ -15,7 +15,7 @@ const Header = ({ isOpen = false, isLight = true, handleOpen, handleClose, handl
 
   const withImagePaths = {
     home: "/",
-    others: ['/blog/']
+    others: ['/blog/', '/writer/']
   }
   
   return (
