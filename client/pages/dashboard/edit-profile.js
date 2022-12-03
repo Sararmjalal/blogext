@@ -127,9 +127,6 @@ const EditProfile = () => {
               multiline={true}
               rows='4'
               sx={{
-                '&::before': {
-                  borderBottom: '2px solid #dce4e7',
-                },
                 display:"block",
                 width: { xs: '100%', md: '48%' },
                 margin:{xs: '10px 0', sm: '0'},

@@ -2,6 +2,10 @@ import { getAllBlogs, getSingleBlog, getBlogComments } from "../../apis/statics"
 import { useTitle } from "../../lib"
 import Head from "next/head"
 import CommentSection from "../../components/blog/CommentSection"
+import { Container } from "@mui/system"
+import { Typography, Rating, Divider, Avatar } from "@mui/material"
+import { useState, useEffect, useRef, useLayoutEffect } from "react"
+import TopImage from "../../components/main/TopImage"
 
 export async function getStaticPaths() {
   const blogs = await getAllBlogs()
@@ -13,34 +17,108 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(ctx) {
+
   const blog = await getSingleBlog(ctx.params._id)
 
   if (blog.msg) return {
     notFound: true
   }
 
+  const isImageValid =  !!blog.imgurl
+
   return {
-    props: { blog },
+    props: { blog, isImageValid },
     revalidate: 10
   }
 }
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, isImageValid }) => {
   console.log(blog)
+  
+  const ref = useRef(null)
+  const [marginTop, setMarginTop] = useState(0)
+
+  useEffect(() => {
+    if(ref.current) setMarginTop(ref.current.clientHeight - 300)
+  }, [ref.current])
 
   return (
-    <section>
-    <Head>
-      <title>{useTitle(blog.title)}</title>
-      <meta name="description" content="Single blog page" />
-    </Head>
-      <div>
-        <h1>Blog Yeay!</h1>
-        <div>
-          <CommentSection blogId={blog._id}/>
-        </div>
-      </div>
-  </section>
+    <Container maxWidth='100%' disableGutters>
+      <Head>
+        <title>{useTitle(blog.title)}</title>
+      </Head>
+      <TopImage src='/statics/images/single-writer.jpg' alt="Blog main picture" />
+      <Container
+        maxWidth='xl'
+        sx={{
+          position: 'relative',
+          padding: { xl: "0" }
+        }}>
+        <Container
+          ref={ref}
+          maxWidth='xl'
+          sx={{
+            bgcolor: "secondary.main",
+            position: "absolute",
+            top: '-300px',
+            left: 0,
+            padding: "100px 0 72px 0"
+          }}>
+          <Avatar
+            src={isImageValid &&`${process.env.SERVER}/${blog.imgurl}`}
+            alt='Blog picture'
+            sx={{
+              width:'200px',
+              height:'200px',
+              objectFit: 'cover',
+              borderRadius: '250px',
+              position: "absolute",
+              top: '-100px',
+              left: "calc(50% - 100px)",
+              border: "5px double white"
+            }}>
+            <img
+              src='/statics/images/user-blog-default.svg'
+              width='200px'
+              height='200px'
+              style={{
+                objectFit:"cover"
+              }}
+            />
+          </Avatar>
+          <Container sx={{
+            maxWidth: '706px',
+            textAlign: "center"
+          }}>
+            <Typography component='h1' variant='h1' >{blog.title}</Typography>
+            <Rating
+              readOnly
+              value={blog.averageScore}
+              size='large'
+              component='div'
+                sx={{
+                  width: 'max-content',
+                  m: "40px 0"
+                }}/>
+            <Divider sx={{
+              margin: "auto",
+              color: "#DCE4E7",
+              borderBottomWidth: "2px"
+            }}/>
+          </Container>
+        </Container>
+      </Container>
+      <Container sx={{ mt: `${marginTop}px` }}>
+        <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+        <Divider sx={{
+          margin: "auto",
+          color: "#DCE4E7",
+          borderBottomWidth: "2px",
+          height:'69px' 
+        }} />
+        <CommentSection blogId={blog._id}/>
+      </Container>
+    </Container>
   )
 }
 

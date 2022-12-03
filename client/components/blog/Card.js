@@ -5,6 +5,7 @@ import { checkImg } from "../../apis/statics"
 import useSWRImmutable from "swr"
 import Image from "next/image"
 import Link from "next/link"
+import { daysBetween } from '../../lib'
 
 const BlogCard = ({ blog, creator }) => {
 
@@ -20,13 +21,6 @@ const BlogCard = ({ blog, creator }) => {
       contentRef.current.innerHTML = currentText.length > 188 ? currentText.slice(0, 188) + '...' : currentText
     }
   }, [contentRef.current])
-
-  const calculatedDays = () => {
-    const difference = (new Date() - new Date(updatedAt)) / (1000 * 3600 * 24)
-    if (difference < 1) return 'Today'
-    if (difference > 1 && difference < 2) return '1 day ago'
-    return Math.ceil(difference) + 'days ago'
-  }
   
   return (
     <Container
@@ -69,7 +63,10 @@ const BlogCard = ({ blog, creator }) => {
             width: '100%'
           }}>
             <Typography variant="p">
-              <Link href={`/writer/${creator._id}`}>
+            <Link href={{
+                pathname: '/writer/[_id]',
+                query: {_id,}
+              }}>
               {`#${creator.name}`}
               </Link>
             </Typography>
@@ -84,7 +81,7 @@ const BlogCard = ({ blog, creator }) => {
           <Typography
             variant="p"
             sx={{ color: "#949799" }}>
-            {calculatedDays()}
+            {daysBetween(updatedAt)}
           </Typography>
         </Box>
         <Typography
@@ -105,17 +102,17 @@ const BlogCard = ({ blog, creator }) => {
             component='span'
             variant='caption'
             sx={{ lineHeight: "23px" }}>
-            {`by ${rateCount} people`}
+            {`by ${rateCount} person`}
           </Typography>
           </Box>
-        <Button variant='primaryButton'>
           <Link href={{
             pathname: '/blog/[_id]',
-            query: {_id,}
+            query: {_id: _id}
           }}>
-          Read more
+            <Button variant='primaryButton'>
+              Read more
+            </Button>
           </Link>
-        </Button>
       </Container>
     </Container>
   )

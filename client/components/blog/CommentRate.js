@@ -2,9 +2,10 @@ import { useSelector } from "react-redux"
 import { selectUser } from "../../store/slice"
 import { useState } from "react"
 import { toast } from 'react-toastify'
-import { Button } from "@mui/material"
+import { Button, Rating, TextField, Typography } from "@mui/material"
 import { getBlogComments } from "../../apis/statics"
 import { refetch, postJSON } from "../../apis/clients"
+import { Container, Box } from "@mui/system"
 
 const CommentRate = ({blogId, refetchKey}) => {
   const thisUser = useSelector(selectUser)
@@ -13,7 +14,6 @@ const CommentRate = ({blogId, refetchKey}) => {
     score: 0
   })
 
-  if(data.score) console.log('ridi')
   const submit = async () => {
     try {
 
@@ -42,7 +42,31 @@ const CommentRate = ({blogId, refetchKey}) => {
   const submitRate = async () => await postJSON(`${process.env.SERVER}/blog/submit-rate`, {blogId, score: data.score})
 
   return (
-      <Button onClick={submit}>Hello from comment rate!</Button>
+    <Container disableGutters sx={{width:'100%'}}>
+      <TextField
+        type='text'
+        variant='standard'
+        placeholder="Leave a review here..."
+        multiline={true}
+        rows='12'
+        sx={{
+          display:"block",
+          fontSize: '16px',
+          lineHeight: '26px',
+        }}
+        value={data.text}
+        onChange={(e) => setData({...data, text:e.target.value})}
+      />
+      <Box sx={{m:"20px 0", width:"100%", display:"flex", gap:'5px' }}>
+      <Typography component='span' variant='caption'>Rate this blog:</Typography>
+        <Rating
+          size="small"
+          value={data.score}
+          onChange={(e, newValue) => setData({...data, score: Number(newValue)})}
+        />
+      </Box>
+      <Button variant='primaryButton' onClick={submit}>Post</Button>
+      </Container>
   )
 }
 

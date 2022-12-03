@@ -23,30 +23,28 @@ export default function LabTabs() {
     setValue(newValue);
   };
 
+  let str = "I have a cat, a dog, and a goat.";
+  const mapObj = {
+    div: "Container",
+    "<span": "<Typography variant='p' component='span'",
+    span: "Typography",
+    "<p": "<Typography variant='p' component='p'",
+    p: "Typography",
+    "<h1": "<Typography variant='h1' component='h1'",
+    h1: "Typography",
+    "<h2": "<Typography variant='h2' component='h2'",
+    h2: "Typography",
+    "<h3": "<Typography variant='h3' component='h3'",
+    h3: "Typography",
+    "<h4": "<Typography variant='h4' component='h4'",
+    h4: "Typography",
+};
+str = str.replace(/\b(?:div|<span|span|<p|p|<h1|h1|<h2|h2|<h3|h3|<h4|h4)\b/gi, matched => mapObj[matched]);
+console.log(str);
+
   return (
     <Box sx={{ maxWidth: 'sm', margin:"auto" }}>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: '#dce4e7' }}>
-          <TabList onChange={handleChange} textColor="primary.main" centered TabIndicatorProps={{style:{height:"2px"}}}>
-            <Tab label="Login" value="1" active sx={{width:"50%"}} />
-            <Tab label="Register" value="2"  sx={{width:"50%"}}/>
-          </TabList>
-        </Box>
-        <TabPanel value="1">
-          <LoginRegister
-            type="login"
-            user={userLogin}
-            setUser={setUserLogin}
-          />
-        </TabPanel>
-        <TabPanel value="2">
-          <LoginRegister
-            type="register"
-            user={userRegister}
-            setUser={setUserRegister}
-          />
-        </TabPanel>
-      </TabContext>
+      <h1>Wells</h1>
     </Box>
   );
 }

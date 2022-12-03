@@ -92,7 +92,6 @@ function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuIte
                 key={name.trim()}
                 passHref href={path}
                 style={pathname === path ? { color: "white" } : { color: "gray" }}
-                onClick={name === 'Logout' && handleOpenConfirm}
               >
                   <MenuItem
                     sx={{
@@ -104,7 +103,17 @@ function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuIte
                     <Typography textAlign="center">{name}</Typography>
                   </MenuItem>
                 </Link>
-              ))}
+                ))}
+                <MenuItem
+                  sx={{
+                    color: "gray" ,
+                    "&:hover": { color: "secondary.main", bgcolor: "inherit" },
+                    "&:active": { background: "#1a1a1ade" }
+                  }}
+                  onClick={handleOpenConfirm}
+                  >
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

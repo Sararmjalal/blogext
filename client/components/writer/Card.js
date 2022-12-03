@@ -4,19 +4,12 @@ import useSWRImmutable from "swr"
 import { Button, Typography, Rating } from "@mui/material"
 import Link from "next/link"
 import { checkImg } from "../../apis/statics"
-
+import {daysBetween} from "../../lib"
 const WriterCard = ({ writer, place }) => {
 
   const { _id, averageScore, avatar, createdAt, bio, name  } = writer
   
   const { data } = useSWRImmutable(`${process.env.SERVER}/${avatar}`, checkImg)
-
-  const calculatedDays = () => {
-    const difference = (new Date() - new Date(createdAt)) / (1000 * 3600 * 24)
-    if (difference < 1) return 'Joined in Today'
-    if (difference > 1 && difference < 2) return 'Joined 1 day ago'
-    return 'Joined ' + Math.ceil(difference) + ' days ago'
-  }
 
   return (
     <Container
@@ -59,7 +52,10 @@ const WriterCard = ({ writer, place }) => {
             width: '100%'
           }}>
             <Typography variant="p">
-              <Link href={`/writer/${_id}`}>
+            <Link href={{
+                pathname: '/writer/[_id]',
+                query: {_id,}
+              }}>
               {`#${name}`}
               </Link>
             </Typography>
@@ -74,7 +70,7 @@ const WriterCard = ({ writer, place }) => {
           <Typography
             variant="p"
             sx={{ color: "#949799" }}>
-            {calculatedDays()}
+            {daysBetween(createdAt) === 'Today' ? "Joined in Today" : 'Joined ' + daysBetween(createdAt)}
           </Typography>
         </Box>
         <Typography
@@ -88,14 +84,14 @@ const WriterCard = ({ writer, place }) => {
               width: '100%',
               m: "16px 0"
             }}/>
-        <Button variant='primaryButton'>
           <Link href={{
             pathname: '/writer/[_id]',
             query: {_id,}
           }}>
-          See more
+            <Button variant='primaryButton'>
+              See more
+            </Button>
           </Link>
-        </Button>
       </Container>
     </Container>
   )

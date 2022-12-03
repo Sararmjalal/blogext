@@ -33,11 +33,7 @@ const StateProvider = ({ children }) => {
     {
       name: 'Edit Profile',
       path: '/dashboard/edit-profile'
-    },
-    {
-      name: 'Logout',
-      path: ''
-    },
+    }
   ]
 
   useEffect(() => {

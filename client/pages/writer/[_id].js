@@ -1,12 +1,10 @@
 import Head from "next/head"
-import Image from "next/image"
 import { getAllBlogs, getAllWriters, getSingleWriter } from "../../apis/statics"
 import { useTitle } from "../../lib"
 import { Container } from "@mui/system"
-import { Typography, Divider, Rating } from "@mui/material"
+import { Typography, Divider, Rating, Avatar } from "@mui/material"
 import BlogSection from "../../components/blog/BlogSection"
 import TopImage from "../../components/main/TopImage"
-import { checkImg } from "../../apis/statics"
 import { useEffect, useRef, useState } from "react"
 
 export async function getStaticPaths() {
@@ -34,15 +32,17 @@ export async function getStaticProps(ctx) {
   if (writer.msg) return {
     notFound: true
   }
+
+  const isImageValid = !!writer.avatar
+
   return {
-    props: { writer, thisBlogs },
+    props: { writer, thisBlogs, isImageValid },
     revalidate: 1
   }
 }
 
-const Writer = ({ writer, thisBlogs }) => {
+const Writer = ({ writer, thisBlogs, isImageValid }) => {
 
-  const isImageValid = async () => writer.avatar ? await checkImg(`${process.env.SERVER}/${writer.avatar}`) : false
   const ref = useRef(null)
   const [marginTop, setMarginTop] = useState(0)
 
@@ -72,20 +72,28 @@ const Writer = ({ writer, thisBlogs }) => {
             left: 0,
             padding: "100px 0 72px 0"
           }}>
-            <Image
-            src={isImageValid() ? `${process.env.SERVER}/${writer.avatar}` : '/statics/images/user-blog-default.svg'}
-            alt='Developer picture'
-            width='200'
-            height='200'
-            style={{
+          <Avatar
+            src={isImageValid &&`${process.env.SERVER}/${writer.avatar}`}
+            alt='Blog picture'
+            sx={{
+              width:'200px',
+              height:'200px',
               objectFit: 'cover',
               borderRadius: '250px',
               position: "absolute",
               top: '-100px',
               left: "calc(50% - 100px)",
               border: "5px double white"
-            }}
-          />
+            }}>
+            <img
+              src='/statics/images/user-blog-default.svg'
+              width='200px'
+              height='200px'
+              style={{
+                objectFit:"cover"
+              }}
+            />
+          </Avatar>
           <Container sx={{
             maxWidth: '706px',
             textAlign: "center"

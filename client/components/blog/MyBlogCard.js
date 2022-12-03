@@ -10,7 +10,6 @@ import Link from 'next/link'
 export default function MyBlogCard({ title, imgurl, _id, swrKey }) {
 
   const [openConfirm, setOpenConfirm] = useState(false)
-  const router = useRouter()
   const { data } = useSWRImmutable(`${process.env.SERVER}/${imgurl}`, checkImg)
 
   return (
@@ -46,14 +45,14 @@ export default function MyBlogCard({ title, imgurl, _id, swrKey }) {
           justifyContent: "end",
           gap: "10px"
         }}>
-        <Button variant='linkAlike'>
-          <Link href={{
+        <Link href={{
             pathname: '/dashboard/edit-blog/[_id]',
-            query: {_id,}
+            query: {_id}
           }}>
+            <Button variant='linkAlike'>
+              Edit
+            </Button>
           </Link>
-          Edit
-        </Button>
         <Button
           onClick={() => setOpenConfirm(true)}
           variant='linkAlikeBlack'
