@@ -3,7 +3,6 @@ import { Button, Typography, Rating } from "@mui/material"
 import { useEffect, useRef } from "react"
 import { checkImg } from "../../apis/statics"
 import useSWRImmutable from "swr"
-import Image from "next/image"
 import Link from "next/link"
 import { daysBetween } from '../../lib'
 
@@ -11,9 +10,11 @@ const BlogCard = ({ blog, creator }) => {
 
   const { _id, averageScore, imgurl, rateCount, title, updatedAt, content } = blog
   
-  const { data } = useSWRImmutable(`${process.env.SERVER}/${imgurl}`, checkImg)
+  const { data } = useSWRImmutable(imgurl, checkImg)
 
   const contentRef = useRef(null) 
+
+  console.log("DATA", data)
 
   useEffect(() => {
     if (contentRef.current) {
@@ -33,15 +34,17 @@ const BlogCard = ({ blog, creator }) => {
         m: { xs: "auto", lg: "0" }
       }}>
       <Container
+        disableGutters
         sx={{
           width: { lg: "460px", xs: '100%' },
           position: "relative",
           height: "460px"
         }}>
-        <Image
-          src={data && imgurl ? `${process.env.SERVER}/${imgurl}` : '/statics/images/user-blog-default.svg'}
+        <img
+          src={data && imgurl ? imgurl : '/statics/images/user-blog-default.svg'}
           alt="Blog Image"
-          fill
+          width="100%"
+          height="100%"
           style={{objectFit:"cover"}}
         />
       </Container>

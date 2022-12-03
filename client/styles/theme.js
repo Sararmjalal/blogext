@@ -139,6 +139,43 @@ export const blogextTheme = createTheme({
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+      h1 {
+        font-family: ${cormorantGaramond.style.fontFamily};
+        font-weight: 400;
+        font-size: 64px;
+        line-height: 80px;
+        font-style: normal;
+      },
+      h2 {
+        font-family: ${cormorantGaramond.style.fontFamily};
+        font-weight: 400;
+        font-size: 52px;
+        line-height: 64px;
+        font-style: normal;
+      },
+      h3 {
+        font-family: ${cormorantGaramond.style.fontFamily};
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 46px;
+        font-style: normal;
+      },
+      h4 {
+        font-family: ${cormorantGaramond.style.fontFamily};
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 32px;
+        font-style: normal;
+      },
+        p {
+          font-family: ${openSans.style.fontFamily};
+          font-size: 16px;
+          line-height: 26px;
+        }
+      `,
+    },
     MuiContainer: {
       variants: [{
         props: { variant: 'main' },

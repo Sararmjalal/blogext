@@ -62,7 +62,13 @@ const LoginRegister = ({ user, setUser, type }) => {
   }
 
   return (
-    <Container maxWidth="100%" disableGutters>
+    <Container
+      maxWidth="100%"
+      disableGutters
+      onKeyDown={(e) => {
+        if(e.key === 'Enter') props[type]['function']()
+      }}
+    >
       <Box width='100%' sx={{display:'block', padding: '24px 0'}}>
         <Typography component='h1' variant='h2'>{props[type]['title']}</Typography>
       <TextField
@@ -101,7 +107,10 @@ const LoginRegister = ({ user, setUser, type }) => {
               setUser({ ...user, [name]: value })
           }} 
         />
-       <Button variant="primaryButton" onClick={props[type]['function']} sx={{mt:'10px', width:'100%'}}>Submit</Button>
+        <Button
+          variant="primaryButton"
+          onClick={props[type]['function']}
+          sx={{ mt: '10px', width: '100%' }}>Submit</Button>
       </Box>
     </Container>
   )

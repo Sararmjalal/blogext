@@ -23,9 +23,7 @@ const AddEditBlog = ({type, title, blog, setBlog, create, edit}) => {
   }
 
   return (
-    <section
-    onKeyDown={(e) => e.key === 'Enter' ? submit() : ""}
-    >
+    <>
   <Head>
    <title>{useTitle(title)}</title>
   </Head>
@@ -103,8 +101,8 @@ const AddEditBlog = ({type, title, blog, setBlog, create, edit}) => {
         </Container>
           <Button variant="primaryButton" onClick={submit}>Publish</Button>
       </Container>
-  </Container>
-</section>
+      </Container>
+      </>
 )
 }
 

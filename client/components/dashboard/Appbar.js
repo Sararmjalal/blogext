@@ -110,7 +110,10 @@ function Appbar({ hasMenu = true, handleDrawerToggle, handleOpenConfirm, menuIte
                     "&:hover": { color: "secondary.main", bgcolor: "inherit" },
                     "&:active": { background: "#1a1a1ade" }
                   }}
-                  onClick={handleOpenConfirm}
+                  onClick={() => {
+                  handleCloseUserMenu()
+                  handleOpenConfirm()
+                  }}
                   >
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>

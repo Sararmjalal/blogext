@@ -10,19 +10,19 @@ import Link from 'next/link'
 export default function MyBlogCard({ title, imgurl, _id, swrKey }) {
 
   const [openConfirm, setOpenConfirm] = useState(false)
-  const { data } = useSWRImmutable(`${process.env.SERVER}/${imgurl}`, checkImg)
+  const { data } = useSWRImmutable(imgurl, checkImg)
 
   return (
       <ListItem alignItems="center" sx={{mb: '10px', p: '16px'}}>
         <ListItemAvatar>
         <Avatar
           alt="Blog Picture"
-          src={data ?
-            `${process.env.SERVER}/${imgurl}`
+          src={data && imgurl?
+            imgurl
             :
             '/statics/images/user-blog-default.svg'
           }
-        >
+          >
           <img
             src='/statics/images/user-blog-default.svg'
             style={{width:"100%", height: "100%", objectFit: "cover"}}
@@ -30,7 +30,7 @@ export default function MyBlogCard({ title, imgurl, _id, swrKey }) {
         </Avatar>
         </ListItemAvatar>
         <ListItemText
-        primary={title}
+        primary={title.length < 23 ? title : title.slice(0, 23) + "..."}
         primaryTypographyProps={{
           variant: "caption",
           component: 'p'

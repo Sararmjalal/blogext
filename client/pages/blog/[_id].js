@@ -3,8 +3,8 @@ import { useTitle } from "../../lib"
 import Head from "next/head"
 import CommentSection from "../../components/blog/CommentSection"
 import { Container } from "@mui/system"
-import { Typography, Rating, Divider, Avatar } from "@mui/material"
-import { useState, useEffect, useRef, useLayoutEffect } from "react"
+import { Typography, Rating, Divider, Avatar, CssBaseline } from "@mui/material"
+import { useState, useEffect, useRef } from "react"
 import TopImage from "../../components/main/TopImage"
 
 export async function getStaticPaths() {
@@ -33,7 +33,6 @@ export async function getStaticProps(ctx) {
 }
 
 const Blog = ({ blog, isImageValid }) => {
-  console.log(blog)
   
   const ref = useRef(null)
   const [marginTop, setMarginTop] = useState(0)
@@ -65,7 +64,7 @@ const Blog = ({ blog, isImageValid }) => {
             padding: "100px 0 72px 0"
           }}>
           <Avatar
-            src={isImageValid &&`${process.env.SERVER}/${blog.imgurl}`}
+            src={isImageValid && blog.imgurl}
             alt='Blog picture'
             sx={{
               width:'200px',
@@ -109,7 +108,8 @@ const Blog = ({ blog, isImageValid }) => {
         </Container>
       </Container>
       <Container sx={{ mt: `${marginTop}px` }}>
-        <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+        <CssBaseline />
+        <Container dangerouslySetInnerHTML={{ __html: blog.content }} />
         <Divider sx={{
           margin: "auto",
           color: "#DCE4E7",
