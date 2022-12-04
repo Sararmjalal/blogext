@@ -11,8 +11,6 @@ const CommentSection = ({ blogId }) => {
   const swrKey = `${process.env.SERVER}/comment/by-blog/${blogId}`
 
   const { data } = useSWR(swrKey, fetcher)
-
-  console.log(data)
     
   if(!data) return <Loading />
   return (

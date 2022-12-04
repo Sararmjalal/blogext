@@ -2,21 +2,17 @@ import { useEffect, useMemo, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { selectUser, setCurrentUser } from "../../store/slice"
 import { postFormData, postJSON, postMe } from "../../apis/clients"
-import { checkImg } from "../../apis/statics"
 import { toast } from "react-toastify"
 import { useTitle } from "../../lib"
 import Head from "next/head"
 import {Container, TextField, Typography, Divider, Button, Tooltip} from "@mui/material"
 import Loading from "../../components/main/Loading"
-import useSWRImmutable from "swr"
 
 const EditProfile = () => {
   const thisUser = useSelector(selectUser)
   const dispatch = useDispatch()
   const [user, setUser] = useState(null)
   const [file, setFile] = useState(null)
-
-  console.log("THIS USER", thisUser)
 
   useEffect(() => {
     setUser({

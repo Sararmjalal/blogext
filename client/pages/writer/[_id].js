@@ -42,7 +42,6 @@ export async function getStaticProps(ctx) {
 }
 
 const Writer = ({ writer, thisBlogs, isImageValid }) => {
-  console.log(writer)
   const ref = useRef(null)
   const [marginTop, setMarginTop] = useState(0)
 

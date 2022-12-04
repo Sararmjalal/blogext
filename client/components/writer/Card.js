@@ -1,6 +1,6 @@
 import { Container, Box } from "@mui/system"
 import Image from "next/image"
-import useSWRImmutable from "swr"
+import useSWR from "swr"
 import { Button, Typography, Rating } from "@mui/material"
 import Link from "next/link"
 import { checkImg } from "../../apis/statics"
@@ -9,7 +9,7 @@ const WriterCard = ({ writer, place }) => {
 
   const { _id, averageScore, avatar, createdAt, bio, name  } = writer
   
-  const { data } = useSWRImmutable(`${process.env.SERVER}/${avatar}`, checkImg)
+  const { data } = useSWR(`${process.env.SERVER}/${avatar}`, checkImg)
 
   return (
     <Container

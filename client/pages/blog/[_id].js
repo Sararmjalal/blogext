@@ -1,11 +1,12 @@
-import { getAllBlogs, getSingleBlog, getBlogComments } from "../../apis/statics"
-import { useTitle } from "../../lib"
 import Head from "next/head"
 import CommentSection from "../../components/blog/CommentSection"
+import TopImage from "../../components/main/TopImage"
+import { getAllBlogs, getSingleBlog, getSingleWriter } from "../../apis/statics"
+import { useTitle } from "../../lib"
 import { Container } from "@mui/system"
 import { Typography, Rating, Divider, Avatar, CssBaseline } from "@mui/material"
 import { useState, useEffect, useRef } from "react"
-import TopImage from "../../components/main/TopImage"
+import Link from "next/link"
 
 export async function getStaticPaths() {
   const blogs = await getAllBlogs()
@@ -24,15 +25,17 @@ export async function getStaticProps(ctx) {
     notFound: true
   }
 
-  const isImageValid =  !!blog.imgurl
+  const isImageValid = !!blog.imgurl
+  
+  const creator = await getSingleWriter(blog.creatorId)
 
   return {
-    props: { blog, isImageValid },
+    props: { blog, creator, isImageValid },
     revalidate: 10
   }
 }
 
-const Blog = ({ blog, isImageValid }) => {
+const Blog = ({ blog, creator, isImageValid }) => {
   
   const ref = useRef(null)
   const [marginTop, setMarginTop] = useState(0)
@@ -109,12 +112,35 @@ const Blog = ({ blog, isImageValid }) => {
       </Container>
       <Container sx={{ mt: `${marginTop}px` }}>
         <CssBaseline />
-        <Container dangerouslySetInnerHTML={{ __html: blog.content }} />
+        <Container sx={{mb:"40px"}} dangerouslySetInnerHTML={{ __html: blog.content }} />
+        <Typography
+          variant='caption'
+          sx={{
+            fontStyle: "italic",
+            fontSize: "16px",
+            ml:'22px'
+          }}>
+          Writtern by:
+          <Typography
+            variant='caption'
+            sx={{
+              fontWeight: "700",
+              fontStyle: "italic",
+              fontSize: "16px"
+            }}>
+            <Link href={{
+              pathname: "/writer/[_id]",
+              query: {_id: blog.creatorId}
+            }}>
+             {" " + creator.name}
+            </Link>
+          </Typography>
+        </Typography>
         <Divider sx={{
           margin: "auto",
           color: "#DCE4E7",
           borderBottomWidth: "2px",
-          height:'69px' 
+          height:'50px' 
         }} />
         <CommentSection blogId={blog._id}/>
       </Container>

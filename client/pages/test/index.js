@@ -40,7 +40,6 @@ export default function LabTabs() {
     h4: "Typography",
 };
 str = str.replace(/\b(?:div|<span|span|<p|p|<h1|h1|<h2|h2|<h3|h3|<h4|h4)\b/gi, matched => mapObj[matched]);
-console.log(str);
 
   return (
     <Box sx={{ maxWidth: 'sm', margin:"auto" }}>

@@ -335,5 +335,3 @@ export const blogextTheme = createTheme({
     }
   }
 });
-
-console.log("CREATE THENE", createTheme())
