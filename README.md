@@ -4,7 +4,7 @@ Simple blog site powered by Next.js
 more information will add here on how this project works.
 
 ## What you need to know about client directory
-client directory uses React.js as a library and Next.js as its freamwork (note that I used MUI for its UI).
+Client directory uses React.js as a library and Next.js as its freamwork (note that I used MUI for its UI).
 I'm a junior React developer at this point and this is my first exprience using Next.js and Material UI altoghether.
 
 Now, let's have a quick guide about what I've written and how can you use this in your first Next.js project.
@@ -48,3 +48,13 @@ See the /client.README for more details
 ### The /store directory
 The store directory holds related files for redux, including its slice and store. I used redux-toolkit and I recommend you to the exact same thing. I use my redux state for every user condition in my project like who can access dashboard, when can I see the dashboard and logout link on the header and wether I can see the sign-in page or not.
 Note that you can build your condition on token as well, but if you want to become more professional at handling global state, I recommend you to the exact same thing.
+
+### The /styles and /icons directory
+It explains itself
+
+
+## What you need to know about server directory
+Server directory is a simple blog-api programmed for Junior Frontend Developers to simply create their first real (but simple) app.
+note that the server/src/db and server/src/public directories must include in ####.gitignore file and for my project to have initial data, these directories are available now.
+
+That's it! Hope you enjoy creating your first Next.js app!
