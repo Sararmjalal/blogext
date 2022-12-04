@@ -10,7 +10,10 @@ const NotFound = () => {
 
   return (
     <Container maxWidth='xl' variant="main">
-    <Head><title>{useTitle('Not Found')}</title></Head>
+      <Head>
+        <title>{useTitle('Not Found')}</title>
+        <meta name="description" content="404 page" />
+      </Head>
     <Container
         maxWidth="md"
         sx={{
@@ -26,7 +29,7 @@ const NotFound = () => {
             overflow: "hidden"
         }}>
         <Image
-          src='/statics/images/404.png'
+          src='/statics/images/404.webp'
           alt='404 picture'
           fill={true}
           style={{

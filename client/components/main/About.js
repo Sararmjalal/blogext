@@ -24,7 +24,7 @@ const About = () => {
         display: { xl: "block", xs: "none" }
       }}>
       <Image
-        src='/statics/images/the-developer.jpg'
+        src='/statics/images/the-developer.webp'
         alt='Developer picture'
         width='152'
         height='152'

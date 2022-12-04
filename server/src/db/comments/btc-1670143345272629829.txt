@@ -1,0 +1,1 @@
+{"_id":"btc-1670143345272629829","text":"We don't like typescript either :D","blogId":"btb-1670102702144755400","userId":"btu-1669893022414995820","createdAt":"2022-12-04T08:42:25.272Z"}

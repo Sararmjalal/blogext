@@ -76,7 +76,7 @@ const LoginRegister = ({ user, setUser, type }) => {
         variant='standard'
           placeholder="Username"
           name='username'
-        sx={{
+          sx={{
           display:"block",
           width: '100%',
           m: '15px 0 30px 0',

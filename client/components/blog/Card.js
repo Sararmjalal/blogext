@@ -2,7 +2,7 @@ import { Container, Box } from "@mui/system"
 import { Button, Typography, Rating } from "@mui/material"
 import { useEffect, useRef } from "react"
 import { checkImg } from "../../apis/statics"
-import useSWR from "swr"
+import useSWRImmutable from "swr"
 import Link from "next/link"
 import { daysBetween } from '../../lib'
 
@@ -10,7 +10,7 @@ const BlogCard = ({ blog, creator }) => {
 
   const { _id, averageScore, imgurl, rateCount, title, updatedAt, content } = blog
   
-  const { data } = useSWR(imgurl, checkImg)
+  const { data } = useSWRImmutable(imgurl, checkImg)
 
   const contentRef = useRef(null) 
 

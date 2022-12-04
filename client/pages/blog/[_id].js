@@ -48,8 +48,9 @@ const Blog = ({ blog, creator, isImageValid }) => {
     <Container maxWidth='100%' disableGutters>
       <Head>
         <title>{useTitle(blog.title)}</title>
+        <meta name="description" content="Single blog page" />
       </Head>
-      <TopImage src='/statics/images/single-writer.jpg' alt="Blog main picture" />
+      <TopImage src='/statics/images/single-writer.webp' alt="Blog main picture" />
       <Container
         maxWidth='xl'
         sx={{

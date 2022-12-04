@@ -1,0 +1,1 @@
+{"_id":"btu-1669916604772687186","username":"mehrad","name":"Mehrad Hajinoroozi","bio":"Try to be a Junior React Developer and in that road I always piss off Sara :D","blogs":["btb-1670103181092423914"],"avatar":"ava-1669969052350633068.jpeg","averageScore":4.5,"createdAt":"2022-12-01T17:43:24.772Z","updatedAt":"2022-12-02T08:17:32.352Z"}

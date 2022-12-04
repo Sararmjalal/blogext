@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { checkImg } from '../../apis/statics';
 import ConfirmModal from '../modals/confirm';
-import useSWR from 'swr'
+import useSWRImmutable from 'swr'
 import Link from 'next/link'
 
 export default function MyBlogCard({ title, imgurl, _id, swrKey }) {
 
   const [openConfirm, setOpenConfirm] = useState(false)
-  const { data } = useSWR(imgurl, checkImg)
+  const { data } = useSWRImmutable(imgurl, checkImg)
 
   return (
       <ListItem alignItems="center" sx={{mb: '10px', p: '16px'}}>

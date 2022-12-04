@@ -1,0 +1,1 @@
+{"_id":"btu-1669893022414995820","username":"sara","name":"Sara Jalal","bio":"Junior React Developer (sometimes I wish it wasn't me doing the frontend thing!)","blogs":["btb-1669908126307367227","btb-1670099810933772644"],"avatar":"ava-1669968941659002349.jpg","averageScore":5,"createdAt":"2022-12-01T11:10:22.414Z","updatedAt":"2022-12-03T13:03:45.236Z"}

@@ -43,7 +43,7 @@ export default function Home({ writers, blogs, creators }) {
         <meta name="description" content="Simple Blog App with Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <TopImage src='/statics/images/home-page.jpg' alt="Home page main picture" />
+      <TopImage src='/statics/images/home-page.webp' alt="Home page main picture" />
       <Container maxWidth='xl' sx={{ position: 'relative', padding: {xl:"0"} }}>
         <About />
         <Typography component='h3' variant='h3' sx={{ mt: "69px", mb: "35px" }}>Top rated blogs</Typography>

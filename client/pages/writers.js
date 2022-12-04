@@ -25,6 +25,7 @@ const Writers = ({ writers }) => {
     <Container maxWidth='100%' disableGutters>
       <Head>
         <title>{useTitle('All Writers')}</title>
+        <meta name="description" content="All writers page" />
       </Head>
       <Container maxWidth='xl' sx={{ position: 'relative', padding: {xl:"0"} }}>
         <Typography component='h3' variant='h3' sx={{ mt: "69px", mb: "35px" }}>All writers</Typography>

@@ -53,8 +53,9 @@ const Writer = ({ writer, thisBlogs, isImageValid }) => {
     <Container maxWidth='100%' disableGutters>
       <Head>
         <title>{useTitle(writer.name)}</title>
+        <meta name="description" content="Single writer page" />
       </Head>
-      <TopImage src='/statics/images/single-writer.jpg' alt="Writer main picture" />
+      <TopImage src='/statics/images/single-writer.webp' alt="Writer main picture" />
       <Container
         maxWidth='xl'
         sx={{

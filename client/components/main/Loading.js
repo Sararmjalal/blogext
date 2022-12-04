@@ -5,8 +5,8 @@ const Loading = () => {
 
   return (
     <Container maxWidth={false} sx={{position: "relative"}}>
-    <Container maxWidth={false} className='LoadingContainer'>
-          <LinearProgress color='primary' className='Loading' />
+    <Container maxWidth={false} className='loadingContainer'>
+          <LinearProgress color='primary' className='loading' />
     </Container>
     </Container>
   )

@@ -34,6 +34,7 @@ const Blogs = ({blogs, creators}) => {
     <Container maxWidth='100%' disableGutters>
       <Head>
         <title>{useTitle('All blogs')}</title>
+        <meta name="description" content="All blogs page" />
       </Head>
       <Container maxWidth='xl' sx={{ padding: {xl:"0"} }}>
         <Typography component='h3' variant='h3' sx={{ mt: "69px", mb: "35px" }}>All blogs</Typography>

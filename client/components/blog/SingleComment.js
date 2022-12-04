@@ -12,6 +12,7 @@ const SingleComment = ({ comment }) => {
         <Avatar
           src={isImageValid &&`${process.env.SERVER}/${comment.user.avatar}`}
           alt='Writer picture'
+          loading="lazy"
           sx={{
             width:'80px',
             height:'80px',
@@ -22,6 +23,7 @@ const SingleComment = ({ comment }) => {
             src='/statics/images/user-blog-default.svg'
             width='80px'
             height='80px'
+            loading="lazy"
             style={{
               objectFit:"cover"
             }}

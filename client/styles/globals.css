@@ -15,7 +15,7 @@ a {
 
 /* Loading Section Start */
 
-.LoadingContainer {
+.loadingContainer {
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -25,7 +25,7 @@ a {
   z-index: 30;
 }
 
-.Loading {
+.loading {
   position: absolute;
   top: 50vh;
   width: 90%;
@@ -36,29 +36,25 @@ a {
 
 /* Loading Section End */
 
-/* Customize MUI classes */
-ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
-background-color: black;
-z-index: '9999';
-}
-
 .tox.tox-tinymce {
   border:'none';
   border-radius: 0;
 }
 
-.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-do3tkx-MuiInputBase-root-MuiInput-root {
+/* Customize MUI classes */
+ul.MuiList-root.MuiList-padding.MuiMenu-list {
+background-color: black;
+z-index: '9999';
+}
+
+.myInput {
   width: 100%;
 }
 
-.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-do3tkx-MuiInputBase-root-MuiInput-root::before {
-  border-bottom: 2px solid #dce4e7;
-}
-
-.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-multiline.css-14nrzf1-MuiInputBase-root-MuiInput-root {
+.MuiInputBase-root.MuiInput-root.MuiInput-underline {
   width: 100%;
 }
 
-.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-multiline.css-14nrzf1-MuiInputBase-root-MuiInput-root::before {
+.MuiInputBase-root.MuiInput-root.MuiInput-underline::before {
   border-bottom: 2px solid #dce4e7;
 }

@@ -36,7 +36,8 @@ const SignIn = () => {
   return (
     <Container maxWidth='xl' disableGutters >
       <Head>
-      <title>{useTitle('Sign in')}</title>
+        <title>{useTitle('Sign in')}</title>
+        <meta name="description" content="Login-Register page" />
       </Head>
     <Box sx={{ maxWidth: 'sm', margin: "auto" }}>
       <TabContext value={value}>

@@ -1,0 +1,1 @@
+{"_id":"btu-1669916148396719961","username":"hamidreza","name":"Hamidreza Hashemi","bio":"I'm a Junior Pullstack Developer and Master of css :)","blogs":["btb-1670102702144755400"],"avatar":"ava-1669968993844051484.jpg","averageScore":5,"createdAt":"2022-12-01T17:35:48.396Z","updatedAt":"2022-12-04T08:46:32.328Z"}
