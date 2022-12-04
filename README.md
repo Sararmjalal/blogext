@@ -55,6 +55,6 @@ It explains itself
 
 ## What you need to know about server directory
 Server directory is a simple blog-api programmed for Junior Frontend Developers to simply create their first real (but simple) app.
-note that the server/src/db and server/src/public directories must include in ####.gitignore file and for my project to have initial data, these directories are available now.
+note that the server/src/db and server/src/public directories must include in .gitignore file and for my project to have initial data, these directories are available now.
 
 That's it! Hope you enjoy creating your first Next.js app!
