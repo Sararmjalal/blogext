@@ -184,6 +184,12 @@ class UserSchema {
       print(userScore)
       thisUser.averageScore = userScore
 
+      console.log("THESE BLOGS", theseBlogs)
+
+      console.log(userScore, 'USERSCORE')
+
+      console.log(thisUser, "THIS USER")
+
       writeFileSync(path.join(userDirectory, `${thisUser._id}/info.txt`), JSON.stringify(thisUser), "utf8")
 
       this.doesCacheneedsUpdate = true

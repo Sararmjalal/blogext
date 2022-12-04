@@ -145,8 +145,12 @@ router.post('/submit-rate', async (req, res, next) => {
       userId: thisUser._id,
       score: req.body.score
     })
+
+    const thisBlog = await Blog.findById(req.body.blogId)
+
+    const thisWriter = thisBlog.creatorId
     
-    await User.calculateUserScore(thisUser._id);
+    await User.calculateUserScore(thisWriter);
 
     return res.status(200).json({ msg: 'ok' });
     
